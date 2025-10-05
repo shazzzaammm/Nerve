@@ -20,5 +20,10 @@ public class EnemyBoardView : MonoBehaviour
         Tween tween = enemyView.transform.DOScale(Vector3.zero, .5f);
         yield return tween.WaitForCompletion();
         Destroy(enemyView.gameObject);
+        if (enemyViews.Count == 0){
+            EndMatchGA endMatchGA = new();
+            ActionSystem.instance.AddReaction(endMatchGA);
+            // performer goes to grid mode
+        }
     }
 }

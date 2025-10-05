@@ -3,6 +3,7 @@ using UnityEngine;
 public class Interactions : Singleton<Interactions>
 {
     public bool playerIsDragging { get;  set; }
+    public bool playerCanMoveOnGrid { get; set; }
     public bool PlayerCanInteract(){
         if(ActionSystem.instance.isPerforming) return false;
         if(DeckUI.instance.isUIActive) return false;
