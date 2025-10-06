@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 
 public abstract class GridCellView : MonoBehaviour
 {
     [SerializeField] protected SpriteRenderer highlight;
     public Vector2Int positionOnGrid { get; protected set; }
-    public GridUnit occupiedUnit { get; protected set; }
+    public List<GridUnit> occupiedUnits { get; protected set; } = new();
     public abstract bool isWalkable();
 
 
@@ -41,7 +43,7 @@ public abstract class GridCellView : MonoBehaviour
     {
         if (!Interactions.instance.playerCanMoveOnGrid) return;
         if (!isWalkable()) return;
-        if (occupiedUnit != null && occupiedUnit.Equals(GridUnitSystem.instance.hero)) return;
+        if (occupiedUnits.Count != 0 && occupiedUnits.Contains(GridUnitSystem.instance.hero)) return;
         if (!GridUnitSystem.instance.HeroCanReachCell(this)) return;
 
         MoveOnGridGA moveOnGridGA = new(GridUnitSystem.instance.hero, this);
@@ -51,16 +53,19 @@ public abstract class GridCellView : MonoBehaviour
 
     public void SetUnit(GridUnit unit)
     {
-        if (unit.occupiedTile != null) unit.occupiedTile.occupiedUnit = null;
-        if (occupiedUnit != null && (unit.Equals(GridUnitSystem.instance.hero) || occupiedUnit.Equals(GridUnitSystem.instance.hero)))
+        unit.occupiedTile?.occupiedUnits.Remove(unit);
+        if (occupiedUnits.Count != 0 && (unit.Equals(GridUnitSystem.instance.hero) || occupiedUnits.Contains(GridUnitSystem.instance.hero)))
         {
             Debug.Log("Fight!!!");
-            EnemyGridUnit enemy = (EnemyGridUnit)(unit is EnemyGridUnit ? unit : occupiedUnit);
-            StartMatchGA startMatchGA = new(GridUnitSystem.instance.hero.data, new() { enemy.data });
+            List<EnemyData> enemyDatas = new();
+            foreach (GridUnit occupiedUnit in occupiedUnits){
+                if (occupiedUnit is EnemyGridUnit enemyUnit) enemyDatas.Add(enemyUnit.data);
+            }
+            StartMatchGA startMatchGA = new(GridUnitSystem.instance.hero.data, enemyDatas);
             ActionSystem.instance.AddReaction(startMatchGA);
         }
         unit.transform.position = transform.position;
-        occupiedUnit = unit;
+        occupiedUnits.Add(unit);
         unit.occupiedTile = this;
     }
 }

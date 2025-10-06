@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,11 +14,19 @@ public class GridSystem : Singleton<GridSystem>
     Dictionary<Vector2, GridCellView> grid;
     void Start()
     {
-        Setup(2);
-        GridUnitSystem.instance.Setup();
+        Setup();
+    }
+    
+    private void OnEnable() {
+        ActionSystem.AttachPerformer<EndMatchGA>(EndMatchGAPerformer);
     }
 
-    public void Setup(int enemyCount)
+    private void OnDisable()
+    {
+        ActionSystem.DetachPerformer<EndMatchGA>();
+    }
+
+    public void Setup()
     {
         grid = new();
         spacing = new(size.x / columns, size.y / rows);
@@ -32,6 +41,7 @@ public class GridSystem : Singleton<GridSystem>
                 grid.Add(new(j, i), cell);
             }
         }
+        GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], DataSystem.instance.enemies);
     }
     public GridCellView GetCellAtPosition(Vector2 pos)
     {
@@ -65,5 +75,11 @@ public class GridSystem : Singleton<GridSystem>
             Destroy(cell.gameObject);
         }
         grid.Clear();
+    }
+
+    private IEnumerator EndMatchGAPerformer(EndMatchGA endMatchGA){
+        Setup();
+        
+        yield return null;
     }
 }

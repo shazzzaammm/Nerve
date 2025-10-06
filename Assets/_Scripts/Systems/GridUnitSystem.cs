@@ -1,20 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridUnitSystem : Singleton<GridUnitSystem>
 {
-    public List<EnemyGridUnit> enemies;//{ get; private set; }
-    public HeroGridUnit hero;//{ get; private set; }
+    public List<EnemyGridUnit> enemies { get; private set; } = new();
+    public HeroGridUnit hero { get; private set; }
 
-    public void Setup()
+    public void Setup(HeroData heroData, List<EnemyData> enemyDatas)
     {
-        foreach (EnemyGridUnit enemy in enemies)
+        foreach (EnemyData data in enemyDatas)
         {
-            GridSystem.instance.SetRandomEnemyPosition(enemy);
+            for (int i = 0; i < 2; i++)
+            {
+                EnemyGridUnit enemy = GridUnitCreator.instance.CreateEnemyUnit(data);
+                GridSystem.instance.SetRandomEnemyPosition(enemy);
+                enemies.Add(enemy);
+            }
         }
+        hero = GridUnitCreator.instance.CreateHeroUnit(heroData);
         GridSystem.instance.SetRandomHeroPosition();
         Interactions.instance.playerCanMoveOnGrid = true;
     }
@@ -38,15 +43,17 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
 
     private IEnumerator MoveOnGridGAPerformer(MoveOnGridGA moveOnGridGA)
     {
-        moveOnGridGA.unit.Move(moveOnGridGA.destination.positionOnGrid);
-
-        moveOnGridGA.destination.SetUnit(moveOnGridGA.unit);
-        
-        if (moveOnGridGA.unit.Equals(hero))
+        if (moveOnGridGA.unit != null)
         {
-            GridEnemyTurnGA gridEnemyTurnGA = new();
-            ActionSystem.instance.AddReaction(gridEnemyTurnGA);
-            Interactions.instance.playerCanMoveOnGrid = false;
+            moveOnGridGA.unit.Move(moveOnGridGA.destination.positionOnGrid);
+            moveOnGridGA.destination.SetUnit(moveOnGridGA.unit);
+
+            if (moveOnGridGA.unit.Equals(hero))
+            {
+                GridEnemyTurnGA gridEnemyTurnGA = new();
+                ActionSystem.instance.AddReaction(gridEnemyTurnGA);
+                Interactions.instance.playerCanMoveOnGrid = false;
+            }
         }
         yield return null;
     }
@@ -55,17 +62,20 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
     {
         foreach (EnemyGridUnit enemy in enemies)
         {
-            enemy.MoveRandomly(1);
+            if (enemy.isActiveAndEnabled)
+                enemy.MoveRandomly(1);
         }
         Interactions.instance.playerCanMoveOnGrid = true;
 
         yield return null;
     }
 
-    public void DisableVisuals(){
+    public void DisableVisuals()
+    {
         Destroy(hero.gameObject);
         hero = null;
-        foreach (EnemyGridUnit enemy in enemies){
+        foreach (EnemyGridUnit enemy in enemies)
+        {
             Destroy(enemy.gameObject);
         }
         enemies.Clear();
