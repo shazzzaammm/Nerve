@@ -20,7 +20,8 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
     {
         ActionSystem.DetachPerformer<StartMatchGA>();
     }
-    private void EndMatchGAPreReaction(EndMatchGA endMatchGA){
+    private void EndMatchGAPreReaction(EndMatchGA endMatchGA)
+    {
         matchUI.SetActive(false);
         matchViews.SetActive(false);
     }
@@ -30,7 +31,7 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         heroData = startMatchGA.hero;
         enemyDatas = startMatchGA.enemies;
         deck = new List<CardData>(heroData.deck);
-        
+
         // visuals
         matchUI.SetActive(true);
         matchViews.SetActive(true);
@@ -47,6 +48,10 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         CardSystem.instance.Setup(heroData.deck);
         DrawCardsGA drawCardsGA = new(CardSystem.instance.handSize);
         ActionSystem.instance.AddReaction(drawCardsGA);
+        
+        // mana
+        RefillManaGA refillManaGA = new();
+        ActionSystem.instance.AddReaction(refillManaGA);
 
         yield return null;
     }

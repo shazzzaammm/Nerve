@@ -27,6 +27,7 @@ public class CardSystem : Singleton<CardSystem>
 
         ActionSystem.SubscribeReaction<DiscardCardsGA>(DiscardCardPostReaction, ReactionTiming.POST);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
+        ActionSystem.SubscribeReaction<EndMatchGA>(EndMatchGAPreReaction, ReactionTiming.PRE);
     }
 
     void OnDisable()
@@ -38,6 +39,7 @@ public class CardSystem : Singleton<CardSystem>
 
         ActionSystem.UnsubscribeReaction<DiscardCardsGA>(DiscardCardPostReaction, ReactionTiming.POST);
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
+        ActionSystem.UnsubscribeReaction<EndMatchGA>(EndMatchGAPreReaction, ReactionTiming.PRE);
 
     }
 
@@ -54,6 +56,7 @@ public class CardSystem : Singleton<CardSystem>
 
     public void Setup(List<CardData> deckData)
     {
+        if (drawPile.Count != 0) return;
         foreach (CardData cardData in deckData)
         {
             Card card = new(cardData);
@@ -166,5 +169,14 @@ public class CardSystem : Singleton<CardSystem>
         }
         yield return new WaitForSeconds(discardPile.Count * .125f);
         discardPile.Clear();
+    }
+
+    private void EndMatchGAPreReaction(EndMatchGA endMatchGA)
+    {
+        drawPile.AddRange(hand);
+        drawPile.AddRange(discardPile);
+        discardPile.Clear();
+        hand.Clear();
+        handView.Clear();
     }
 }

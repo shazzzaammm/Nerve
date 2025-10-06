@@ -23,6 +23,22 @@ public abstract class GridCellView : MonoBehaviour
     {
         if (isWalkable())
         {
+            /*
+            if (GridUnitSystem.instance.HeroCanReachCell(this))
+            {
+                Color newColor = Color.green;
+                newColor.a = 128;
+                highlight.color = newColor;
+                Debug.Log(newColor.a + " " + highlight.color.a);
+            }
+            else
+            {
+                Color newColor = Color.white;
+                newColor.a = 40;
+                highlight.color = newColor;
+                Debug.Log(newColor.a + " " + highlight.color.a);
+            }
+            */
             highlight.enabled = true;
         }
     }
@@ -56,9 +72,10 @@ public abstract class GridCellView : MonoBehaviour
         unit.occupiedTile?.occupiedUnits.Remove(unit);
         if (occupiedUnits.Count != 0 && (unit.Equals(GridUnitSystem.instance.hero) || occupiedUnits.Contains(GridUnitSystem.instance.hero)))
         {
-            Debug.Log("Fight!!!");
             List<EnemyData> enemyDatas = new();
-            foreach (GridUnit occupiedUnit in occupiedUnits){
+            occupiedUnits.Add(unit);
+            foreach (GridUnit occupiedUnit in occupiedUnits)
+            {
                 if (occupiedUnit is EnemyGridUnit enemyUnit) enemyDatas.Add(enemyUnit.data);
             }
             StartMatchGA startMatchGA = new(GridUnitSystem.instance.hero.data, enemyDatas);
