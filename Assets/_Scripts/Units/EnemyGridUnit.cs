@@ -9,22 +9,40 @@ public class EnemyGridUnit : GridUnit
         this.data = data;
         gameObject.GetComponent<SpriteRenderer>().sprite = this.data.image;
     }
-    public void MoveRandomly(int distance)
-    {
-        List<Vector2> directions = new();
-        directions.Add(Vector2.up);
-        directions.Add(Vector2.down);
-        directions.Add(Vector2.left);
-        directions.Add(Vector2.right);
+    protected List<Vector2> directions = new() {
+            Vector2.up,
+            Vector2.down,
+            Vector2.left,
+            Vector2.right,
+            new(1, 1),
+            new(-1, 1),
+            new(1, -1),
+            new(-1, -1)
+};
 
+    protected List<GridCellView> GetPossibleMoves(int distance)
+    {
         List<GridCellView> possibleMoves = new();
         foreach (Vector2 dir in directions)
         {
             GridCellView move = GridSystem.instance.GetCellAtPosition((dir * distance) + positionOnGrid);
             if (move && move.isWalkable()) possibleMoves.Add(move);
         }
+        return possibleMoves;
+    }
+    public void MoveRandomly(int distance)
+    {
+        List<GridCellView> possibleMoves = GetPossibleMoves(distance);
+        MoveOnGridGA moveOnGridGA = new(this, possibleMoves.Count > 0 ? possibleMoves.Draw() : occupiedTile);
+        ActionSystem.instance.AddReaction(moveOnGridGA);
+    }
 
-        MoveOnGridGA moveOnGridGA = new(this, possibleMoves.Draw());
+    public void MoveTowardsPlayer(int distance)
+    {
+        List<GridCellView> possibleMoves = GetPossibleMoves(distance);
+        Vector2 heroPosition = GridUnitSystem.instance.hero.positionOnGrid;
+        possibleMoves.Sort((v1, v2) => (v1.positionOnGrid - heroPosition).sqrMagnitude.CompareTo((v2.positionOnGrid - heroPosition).sqrMagnitude));
+        MoveOnGridGA moveOnGridGA = new(this, possibleMoves.Count > 0 ? possibleMoves[0] : occupiedTile);
         ActionSystem.instance.AddReaction(moveOnGridGA);
     }
 }

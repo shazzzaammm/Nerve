@@ -12,7 +12,7 @@ public class EnemyView : CombatantView
 
 
     public void Setup(EnemyData enemyData){
-        base.SetupBase(enemyData.health);
+        base.SetupBase(enemyData.health, enemyData.initialShield);
         spriteRenderer.sprite = enemyData.image;
         attackPower = enemyData.attackPower;
         UpdateIntentionText();
@@ -21,6 +21,7 @@ public class EnemyView : CombatantView
     private void UpdateIntentionText(){
         intentionText.text = "Atk: " + attackPower;
     }
+    
 
 
 }

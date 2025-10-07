@@ -6,11 +6,13 @@ public class DamageSystem : Singleton<DamageSystem>
     void OnEnable()
     {
         ActionSystem.AttachPerformer<DealDamageGA>(DealDamagePerformer);
+        ActionSystem.AttachPerformer<AddShieldGA>(AddShieldGAPerformer);
 
     }
     void OnDisable()
     {
         ActionSystem.DetachPerformer<DealDamageGA>();
+        ActionSystem.DetachPerformer<AddShieldGA>();
     }
 
     private IEnumerator DealDamagePerformer(DealDamageGA dealDamageGA)
@@ -30,6 +32,14 @@ public class DamageSystem : Singleton<DamageSystem>
                     // Player dies
                 }
             }
+        }
+        yield return null;
+    }
+
+    private IEnumerator AddShieldGAPerformer(AddShieldGA addShieldGA){
+        foreach (CombatantView target in addShieldGA.targets){
+            target.AddShield(addShieldGA.amount);
+            Debug.Log("MOVE THIS TO ITS OWN SYSTEM OR SOMETHING YOU MORON!!!!!!! (add shield performer btw)");
         }
         yield return null;
     }

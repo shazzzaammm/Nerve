@@ -11,4 +11,9 @@ public abstract class GridUnit : MonoBehaviour
         positionOnGrid = destination;
         transform.position = GridSystem.instance.GetCellAtPosition(positionOnGrid).transform.position;
     }
+
+    
+    protected void Update(){
+        transform.LookAt(Camera.main.transform);
+    }
 }

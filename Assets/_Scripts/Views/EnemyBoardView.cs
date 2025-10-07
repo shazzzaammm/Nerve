@@ -9,6 +9,10 @@ public class EnemyBoardView : MonoBehaviour
     public List<EnemyView> enemyViews { get; private set; } = new();
 
     public void AddEnemy(EnemyData enemyData){
+        if (enemyViews.Count > slots.Count){
+            Debug.Log("EnemyBoardView Slots full!!");
+            return;
+        }
         Transform slot = slots[enemyViews.Count];
         EnemyView enemyView = EnemyViewCreator.instance.CreateEnemyView(enemyData, slot.position, slot.rotation);
         enemyView.transform.parent = slot;
@@ -23,7 +27,6 @@ public class EnemyBoardView : MonoBehaviour
         if (enemyViews.Count == 0){
             EndMatchGA endMatchGA = new();
             ActionSystem.instance.AddReaction(endMatchGA);
-            // performer goes to grid mode
         }
     }
 }

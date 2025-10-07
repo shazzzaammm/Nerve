@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class GridSystem : Singleton<GridSystem>
 {
+    [SerializeField] private Transform gridParent;
     [SerializeField] private GridCellView walkableCell, blockedCell;
 
     [SerializeField] private int rows;
@@ -16,8 +17,9 @@ public class GridSystem : Singleton<GridSystem>
     {
         Setup();
     }
-    
-    private void OnEnable() {
+
+    private void OnEnable()
+    {
         ActionSystem.AttachPerformer<EndMatchGA>(EndMatchGAPerformer);
     }
 
@@ -35,7 +37,7 @@ public class GridSystem : Singleton<GridSystem>
             for (int j = 0; j < columns; j++)
             {
                 int rand = Random.Range(0, 10);
-                GridCellView cell = Instantiate(rand > 1 ? walkableCell : blockedCell, transform.position + new Vector3(spacing.x * j, spacing.y * i) - ((Vector3)size * .5f), Quaternion.identity);
+                GridCellView cell = Instantiate(rand > 1 ? walkableCell : blockedCell, gridParent.position + new Vector3(spacing.x * j, spacing.y * i) - ((Vector3)size * .5f), Quaternion.identity, gridParent);
                 cell.name = "Cell " + j + " " + i;
                 cell.Setup(j, i);
                 grid.Add(new(j, i), cell);
@@ -51,35 +53,64 @@ public class GridSystem : Singleton<GridSystem>
         }
         return null;
     }
-    
-    public void SetRandomHeroPosition(){
+
+    public List<GridCellView> GetCellNeighbors(GridCellView cell)
+    {
+        List<Vector2> directions = new() {
+            Vector2.up,
+            Vector2.down,
+            Vector2.left,
+            Vector2.right,
+            new(1, 1),
+            new(-1, 1),
+            new(1, -1),
+            new(-1, -1)
+        };
+        List<GridCellView> neighbors = new();
+        foreach (Vector2 dir in directions)
+        {
+            GridCellView neighbor = GetCellAtPosition(cell.positionOnGrid + dir);
+            if (neighbor)
+            {
+                neighbors.Add(neighbor);
+            }
+        }
+        return neighbors;
+    }
+
+    public void SetRandomHeroPosition()
+    {
         GridCellView cell = grid.Where(t => t.Key.x < columns / 2 && t.Value.isWalkable()).OrderBy(t => Random.value).First().Value;
         GridUnitSystem.instance.hero.Move(cell.positionOnGrid);
     }
 
-    public void SetRandomEnemyPosition(EnemyGridUnit enemy){
+    public void SetRandomEnemyPosition(EnemyGridUnit enemy)
+    {
         GridCellView cell = grid.Where(t => t.Key.x > columns / 2 && t.Value.isWalkable()).OrderBy(t => Random.value).First().Value;
         enemy.Move(cell.positionOnGrid);
     }
 
     private void OnDrawGizmosSelected()
     {
+        if (!gridParent) return;
         Gizmos.color = Color.softRed;
-        Gizmos.DrawWireCube(transform.position, size);
+        Gizmos.DrawWireCube(gridParent.position, size);
     }
 
     public void DisableVisuals()
     {
         Interactions.instance.playerCanMoveOnGrid = false;
-        foreach (var cell in grid.Values){
+        foreach (var cell in grid.Values)
+        {
             Destroy(cell.gameObject);
         }
         grid.Clear();
     }
 
-    private IEnumerator EndMatchGAPerformer(EndMatchGA endMatchGA){
+    private IEnumerator EndMatchGAPerformer(EndMatchGA endMatchGA)
+    {
         Setup();
-        
+
         yield return null;
     }
 }

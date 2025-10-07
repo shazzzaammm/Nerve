@@ -12,7 +12,7 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
     {
         foreach (EnemyData data in enemyDatas)
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 1; i++)
             {
                 EnemyGridUnit enemy = GridUnitCreator.instance.CreateEnemyUnit(data);
                 GridSystem.instance.SetRandomEnemyPosition(enemy);

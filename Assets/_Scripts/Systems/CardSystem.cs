@@ -143,8 +143,9 @@ public class CardSystem : Singleton<CardSystem>
     private IEnumerator DiscardCard(CardView cardView)
     {
         discardPile.Add(cardView.card);
-        cardView.transform.DOScale(Vector3.zero, .15f);
-        Tween tween = cardView.transform.DOMove(discardPilePoint.position, .15f);
+        cardView.transform.DOScale(discardPilePoint.localScale, .15f);
+        cardView.transform.DORotate(discardPilePoint.rotation.eulerAngles, .05f);
+        Tween tween = cardView.transform.DOMove(discardPilePoint.position, .25f);
         yield return tween.WaitForCompletion();
         hand.Remove(cardView.card);
         Destroy(cardView.gameObject);
