@@ -3,18 +3,21 @@ using UnityEngine;
 
 public class EffectSystem : Singleton<EffectSystem>
 {
-    void OnEnable(){
+    void OnEnable()
+    {
         ActionSystem.AttachPerformer<PerformEffectGA>(PerformEffectPerformer);
 
     }
 
-    void OnDisable(){
+    void OnDisable()
+    {
         ActionSystem.DetachPerformer<PerformEffectGA>();
 
     }
 
-    private IEnumerator PerformEffectPerformer(PerformEffectGA performEffectGA){
-        GameAction effectAction = performEffectGA.effect.GetGameAction(performEffectGA.targets);
+    private IEnumerator PerformEffectPerformer(PerformEffectGA performEffectGA)
+    {
+        GameAction effectAction = performEffectGA.effect.GetGameAction(performEffectGA.targets, HeroSystem.instance.heroView);
         ActionSystem.instance.AddReaction(effectAction);
         yield return null;
     }

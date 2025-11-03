@@ -40,7 +40,7 @@ public class EnemySystem : Singleton<EnemySystem>
         yield return tween.WaitForCompletion();
         tween = attacker.transform.DOMove(originalPosition, .5f);
         yield return tween.WaitForCompletion();
-        DealDamageGA dealDamageGA = new(attacker.attackPower, new() { HeroSystem.instance.heroView });
+        DealDamageGA dealDamageGA = new(attacker.attackPower, new() { HeroSystem.instance.heroView },enemyAttackHeroGA.attacker);
         ActionSystem.instance.AddReaction(dealDamageGA);
     }
     

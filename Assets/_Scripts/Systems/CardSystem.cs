@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -179,5 +180,7 @@ public class CardSystem : Singleton<CardSystem>
         discardPile.Clear();
         hand.Clear();
         handView.Clear();
+        DrawCardsGA drawCardsGA = new(Math.Max(handSize-hand.Count,0));
+        ActionSystem.instance.AddReaction(drawCardsGA);
     }
 }
