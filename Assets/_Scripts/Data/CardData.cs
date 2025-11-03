@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using SerializeReferenceEditor;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Card/data")]
+[CreateAssetMenu(menuName = "Data/Card")]
 public class CardData : ScriptableObject
 {
     [field: SerializeField] public string title { get; private set; }
