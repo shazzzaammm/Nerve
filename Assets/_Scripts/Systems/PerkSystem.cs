@@ -7,8 +7,10 @@ public class PerkSystem : Singleton<PerkSystem>
     private readonly List<Perk> perks = new();
     
     void Start(){
+        /*
         Perk perk = new(perkData);
         AddPerk(perk);
+        */
     }
     public void AddPerk(Perk perk){
         perks.Add(perk);

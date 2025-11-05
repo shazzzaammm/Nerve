@@ -13,6 +13,7 @@ public class HandView : MonoBehaviour
     public IEnumerator AddCard(CardView cardView)
     {
         cards.Add(cardView);
+        cardView.transform.SetParent(transform);
         yield return UpdateCardPositions(.2f);
     }
     

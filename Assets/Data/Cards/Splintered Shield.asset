@@ -10,28 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
-  m_Name: Arrow Rain
+  m_Name: Splintered Shield
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  <title>k__BackingField: Arrow Rain
-  <description>k__BackingField: Deals 2 damage to all enemies
-  <cost>k__BackingField: 2
-  <image>k__BackingField: {fileID: 194935847770418729, guid: a3602fc1ff08c98bd97d6a7d8b88dbad, type: 3}
+  <title>k__BackingField: Splintered Shield
+  <description>k__BackingField: A sheild, half of it remains. even then, that half
+    heavly damaged from prior encounters.
+  <cost>k__BackingField: 0
+  <image>k__BackingField: {fileID: -393162805957087134, guid: 91710769b2290b3f58513ac4e281b772, type: 3}
   <manualTargetEffect>k__BackingField:
     rid: -2
   <otherEffects>k__BackingField:
   - <targetMode>k__BackingField:
-      rid: 8593481100546015304
+      rid: 1995634610906333259
     <effect>k__BackingField:
-      rid: 8593481100546015305
+      rid: 1995634610906333260
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8593481100546015304
-      type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
+    - rid: 1995634610906333259
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 8593481100546015305
-      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+    - rid: 1995634610906333260
+      type: {class: AddShieldEffect, ns: , asm: Assembly-CSharp}
       data:
-        damageAmount: 2
+        shieldAmount: 1

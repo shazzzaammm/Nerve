@@ -1,0 +1,7 @@
+Black - - ground
+White - - wall
+Green - - level entrance
+Red - - level exit (can be more than once)
+Orange - - enemy spawn point
+Yellow - - chest for loot
+Blue - - boss spawn, will spawn exit under them when boss dies

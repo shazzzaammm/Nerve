@@ -10,7 +10,7 @@ public class CardView : MonoBehaviour
     [SerializeField] private TMP_Text cost;
     [SerializeField] private SpriteRenderer image;
     [SerializeField] private GameObject wrapper;
-    [SerializeField] private GameObject selectionGlow;
+    [SerializeField] private GameObject infoWrapper;
     [SerializeField] private LayerMask dropLayer;
 
     private Vector3 dragStartPosition;
@@ -49,7 +49,6 @@ public class CardView : MonoBehaviour
         {
             CardViewSelectSystem.instance.ToggleCardSelection(this);
             selected = !selected;
-            selectionGlow.SetActive(selected);
         }
 
         if (card.manualTargetEffect != null)
@@ -63,7 +62,6 @@ public class CardView : MonoBehaviour
             {
                 Interactions.instance.playerIsDragging = true;
                 wrapper.SetActive(true);
-                selectionGlow.SetActive(false);
                 CardViewHoverSystem.instance.Hide();
                 dragStartPosition = transform.position;
                 dragStartRotation = transform.rotation;
@@ -104,7 +102,6 @@ public class CardView : MonoBehaviour
             {
                 transform.DOMove(dragStartPosition, .1f);
                 transform.DORotate(dragStartRotation.eulerAngles, .1f);
-                selectionGlow.SetActive(selected);
             }
             Interactions.instance.playerIsDragging = false;
         }

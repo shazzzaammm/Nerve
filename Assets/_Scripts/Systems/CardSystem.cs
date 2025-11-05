@@ -180,7 +180,7 @@ public class CardSystem : Singleton<CardSystem>
         discardPile.Clear();
         hand.Clear();
         handView.Clear();
-        DrawCardsGA drawCardsGA = new(Math.Max(handSize-hand.Count,0));
-        ActionSystem.instance.AddReaction(drawCardsGA);
+        // DrawCardsGA drawCardsGA = new(Math.Max(handSize - hand.Count, 0));
+        // ActionSystem.instance.AddReaction(drawCardsGA);
     }
 }

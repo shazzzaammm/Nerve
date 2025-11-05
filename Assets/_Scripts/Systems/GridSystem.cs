@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Overlays;
 using UnityEngine;
 
 public class GridSystem : Singleton<GridSystem>
@@ -8,11 +9,13 @@ public class GridSystem : Singleton<GridSystem>
     [SerializeField] private Transform gridParent;
     [SerializeField] private GridCellView walkableCell, blockedCell;
 
-    [SerializeField] private int rows;
-    [SerializeField] private int columns;
     [SerializeField] private Vector2 size;
+
+    [SerializeField] private Texture2D[] layouts;
     private Vector2 spacing;
     Dictionary<Vector2, GridCellView> grid;
+    List<Vector2> enemySpawnPositions;
+    List<Vector2> heroSpawnPostions;
     void Start()
     {
         Setup();
@@ -31,17 +34,25 @@ public class GridSystem : Singleton<GridSystem>
     public void Setup()
     {
         grid = new();
-        spacing = new(size.x / columns, size.y / rows);
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
-                int rand = Random.Range(0, 10);
-                GridCellView cell = Instantiate(rand > 1 ? walkableCell : blockedCell, gridParent.position + new Vector3(spacing.x * j, spacing.y * i) - ((Vector3)size * .5f), Quaternion.identity, gridParent);
-                cell.name = "Cell " + j + " " + i;
-                cell.Setup(j, i);
-                grid.Add(new(j, i), cell);
+        heroSpawnPostions = new();
+        enemySpawnPositions = new();
+        int randomLayout = Random.Range(0, layouts.Length);
+        Dictionary<Vector2Int, TileType> layout = LevelGenerationSystem.instance.Generate(layouts[randomLayout]);
+        spacing = new(size.x / layouts[randomLayout].width, size.y / layouts[randomLayout].height);
+        foreach(Vector2Int pos in layout.Keys){
+            TileType cellType = layout[pos];
+            GridCellView cell = Instantiate(cellType == TileType.WALL || cellType == TileType.NONE ? blockedCell : walkableCell, gridParent.position + new Vector3(spacing.x * pos.x, spacing.y * pos.y) - ((Vector3)size * .5f), Quaternion.identity, gridParent);
+            
+            if (cellType == TileType.PLAYER_SPAWN){
+                heroSpawnPostions.Add(new(pos.x, pos.y));
+                Debug.Log("we have a spawn point");
             }
+            if (cellType == TileType.ENEMY_SPAWN){
+                enemySpawnPositions.Add(new(pos.x, pos.y));
+            }
+            cell.name = "Cell " + pos.x + " " + pos.y;
+            cell.Setup(pos.x, pos.y);
+            grid.Add(new(pos.x, pos.y), cell);
         }
         GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], DataSystem.instance.enemies);
     }
@@ -80,14 +91,16 @@ public class GridSystem : Singleton<GridSystem>
 
     public void SetRandomHeroPosition()
     {
-        GridCellView cell = grid.Where(t => t.Key.x < columns / 2 && t.Value.isWalkable()).OrderBy(t => Random.value).First().Value;
-        GridUnitSystem.instance.hero.Move(cell.positionOnGrid);
+        int rand = Random.Range(0, heroSpawnPostions.Count);
+        Vector2 cell = heroSpawnPostions[rand];
+        GridUnitSystem.instance.hero.Move(cell);
     }
 
     public void SetRandomEnemyPosition(EnemyGridUnit enemy)
     {
-        GridCellView cell = grid.Where(t => t.Key.x > columns / 2 && t.Value.isWalkable()).OrderBy(t => Random.value).First().Value;
-        enemy.Move(cell.positionOnGrid);
+        int rand = Random.Range(0, enemySpawnPositions.Count);
+        Vector2 cell = enemySpawnPositions[rand];
+        enemy.Move(cell);
     }
 
     private void OnDrawGizmosSelected()
