@@ -39,22 +39,44 @@ public class GridSystem : Singleton<GridSystem>
         int randomLayout = Random.Range(0, layouts.Length);
         Dictionary<Vector2Int, TileType> layout = LevelGenerationSystem.instance.Generate(layouts[randomLayout]);
         spacing = new(size.x / layouts[randomLayout].width, size.y / layouts[randomLayout].height);
-        foreach(Vector2Int pos in layout.Keys){
+
+        int sumX = 0;
+        int sumY = 0;
+
+        foreach (Vector2Int pos in layout.Keys)
+        {
+            sumX += pos.x;
+            sumY += pos.y;
+        }
+
+        Vector2 center = new(sumX / layout.Keys.Count, sumY / layout.Keys.Count);
+
+        foreach (Vector2Int pos in layout.Keys)
+        {
             TileType cellType = layout[pos];
-            GridCellView cell = Instantiate(cellType == TileType.WALL || cellType == TileType.NONE ? blockedCell : walkableCell, gridParent.position + new Vector3(spacing.x * pos.x, spacing.y * pos.y) - ((Vector3)size * .5f), Quaternion.identity, gridParent);
-            
-            if (cellType == TileType.PLAYER_SPAWN){
+            GridCellView cell = Instantiate(cellType == TileType.WALL || cellType == TileType.NONE ? blockedCell : walkableCell, gridParent.position + new Vector3(spacing.x * (pos.x - center.x), spacing.y * (pos.y - center.y)), Quaternion.identity, gridParent);
+
+            if (cellType == TileType.PLAYER_SPAWN)
+            {
                 heroSpawnPostions.Add(new(pos.x, pos.y));
-                Debug.Log("we have a spawn point");
             }
-            if (cellType == TileType.ENEMY_SPAWN){
+            if (cellType == TileType.ENEMY_SPAWN)
+            {
                 enemySpawnPositions.Add(new(pos.x, pos.y));
             }
             cell.name = "Cell " + pos.x + " " + pos.y;
             cell.Setup(pos.x, pos.y);
             grid.Add(new(pos.x, pos.y), cell);
         }
-        GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], DataSystem.instance.enemies);
+
+        List<EnemyData> possibleEnemyDatas = DataSystem.instance.enemies;
+        List<EnemyData> chosenEnemyDatas = new();
+        for (int i = 0; i < enemySpawnPositions.Count; i++)
+        {
+            EnemyData chosenEnemy = possibleEnemyDatas.GetRandom();
+            chosenEnemyDatas.Add(chosenEnemy);
+        }
+        GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], chosenEnemyDatas);
     }
     public GridCellView GetCellAtPosition(Vector2 pos)
     {
@@ -103,6 +125,15 @@ public class GridSystem : Singleton<GridSystem>
         enemy.Move(cell);
     }
 
+    public void SetEnemyPosition(EnemyGridUnit enemy, int index)
+    {
+        if (index < 0) index = 0;
+        if (index > enemySpawnPositions.Count) index %= enemySpawnPositions.Count;
+
+        Vector2 cell = enemySpawnPositions[index];
+        enemy.Move(cell);
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (!gridParent) return;
@@ -126,4 +157,5 @@ public class GridSystem : Singleton<GridSystem>
 
         yield return null;
     }
+
 }

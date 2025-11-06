@@ -12,12 +12,10 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
     {
         foreach (EnemyData data in enemyDatas)
         {
-            for (int i = 0; i < 1; i++)
-            {
                 EnemyGridUnit enemy = GridUnitCreator.instance.CreateEnemyUnit(data);
                 GridSystem.instance.SetRandomEnemyPosition(enemy);
-                enemies.Add(enemy);
-            }
+            GridSystem.instance.SetEnemyPosition(enemy, enemies.Count);
+            enemies.Add(enemy);
         }
         hero = GridUnitCreator.instance.CreateHeroUnit(heroData);
         GridSystem.instance.SetRandomHeroPosition();

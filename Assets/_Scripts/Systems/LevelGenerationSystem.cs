@@ -13,8 +13,6 @@ public enum TileType
 }
 public class LevelGenerationSystem : Singleton<LevelGenerationSystem>
 {
-
-
     public Dictionary<Vector2Int, TileType> Generate(Texture2D image)
     {
         int width = image.width;
@@ -29,7 +27,7 @@ public class LevelGenerationSystem : Singleton<LevelGenerationSystem>
                 Color pixel = image.GetPixel(x, y);
                 string hexColor = ColorUtility.ToHtmlStringRGB(pixel).ToUpper();
                 Vector2Int tilePosition = new(x, y);
-                // Debug.Log(pixel + " " + hexColor);
+                Debug.Log(pixel + " " + hexColor);
                 var tileType = hexColor switch
                 {
                     "000000" => TileType.FLOOR,
@@ -42,9 +40,11 @@ public class LevelGenerationSystem : Singleton<LevelGenerationSystem>
                     "0000FF" => TileType.BOSS_SPAWN,
                     _ => TileType.NONE,
                 };
-                layout.Add(tilePosition, tileType);
+                if (pixel.a != 0)
+                    layout.Add(tilePosition, tileType);
             }
         }
+        Debug.Log(layout.Keys.Count);
         return layout;
     }
 }
