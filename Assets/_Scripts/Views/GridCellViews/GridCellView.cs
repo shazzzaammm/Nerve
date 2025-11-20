@@ -14,7 +14,7 @@ public abstract class GridCellView : MonoBehaviour
     {
         highlight.enabled = false;
     }
-    public void Setup(int x, int y)
+    public virtual void Setup(int x, int y)
     {
         positionOnGrid = new(x, y);
     }
@@ -67,7 +67,7 @@ public abstract class GridCellView : MonoBehaviour
     }
 
 
-    public void SetUnit(GridUnit unit)
+    public virtual void SetUnit(GridUnit unit)
     {
         unit.occupiedTile?.occupiedUnits.Remove(unit);
         if (occupiedUnits.Count != 0 && (unit.Equals(GridUnitSystem.instance.hero) || occupiedUnits.Contains(GridUnitSystem.instance.hero)))

@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Overlays;
 using UnityEngine;
+using UnityEngine.TextCore;
 
 public class GridSystem : Singleton<GridSystem>
 {
     [SerializeField] private Transform gridParent;
     [SerializeField] private GridCellView walkableCell, blockedCell;
+    [SerializeField] private ChestGridCell chestCell;
 
     [SerializeField] private Vector2 size;
 
@@ -54,7 +54,14 @@ public class GridSystem : Singleton<GridSystem>
         foreach (Vector2Int pos in layout.Keys)
         {
             TileType cellType = layout[pos];
-            GridCellView cell = Instantiate(cellType == TileType.WALL || cellType == TileType.NONE ? blockedCell : walkableCell, gridParent.position + new Vector3(spacing.x * (pos.x - center.x), spacing.y * (pos.y - center.y)), Quaternion.identity, gridParent);
+            GridCellView cellPrefab = cellType switch
+            {
+                TileType.FLOOR => walkableCell,
+                TileType.WALL => blockedCell,
+                TileType.CHEST_SPAWN => chestCell,
+                _ => blockedCell,
+            };
+            GridCellView cell = Instantiate(cellPrefab, gridParent.position + new Vector3(spacing.x * (pos.x - center.x), spacing.y * (pos.y - center.y)), Quaternion.identity, gridParent);
 
             if (cellType == TileType.PLAYER_SPAWN)
             {
