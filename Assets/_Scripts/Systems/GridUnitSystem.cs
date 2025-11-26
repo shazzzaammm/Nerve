@@ -12,8 +12,8 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
     {
         foreach (EnemyData data in enemyDatas)
         {
-                EnemyGridUnit enemy = GridUnitCreator.instance.CreateEnemyUnit(data);
-                GridSystem.instance.SetRandomEnemyPosition(enemy);
+            EnemyGridUnit enemy = GridUnitCreator.instance.CreateEnemyUnit(data);
+            GridSystem.instance.SetRandomEnemyPosition(enemy);
             GridSystem.instance.SetEnemyPosition(enemy, enemies.Count);
             enemies.Add(enemy);
         }
@@ -58,8 +58,14 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
 
     private IEnumerator GridEnemyTurnGAPerformer(GridEnemyTurnGA gridEnemyTurnGA)
     {
-        foreach (EnemyGridUnit enemy in enemies)
+        for (int i = enemies.Count - 1; i >= 0; i--)
         {
+            EnemyGridUnit enemy = enemies[i];
+            if (((UnityEngine.Object)enemy) == null)
+            {
+                enemies.Remove(enemy);
+                continue;
+            }
             if (enemy.isActiveAndEnabled)
                 enemy.MoveRandomly(1);
         }
@@ -70,11 +76,32 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
 
     public void DisableVisuals()
     {
-        Destroy(hero.gameObject);
-        hero = null;
+        hero.gameObject.SetActive(false);
         foreach (EnemyGridUnit enemy in enemies)
         {
-            Destroy(enemy.gameObject);
+            if (((UnityEngine.Object)enemy) != null) enemy.gameObject.SetActive(false);
+        }
+    }
+
+    public void EnableVisuals()
+    {
+        hero.gameObject.SetActive(true);
+        foreach (EnemyGridUnit enemy in enemies)
+        {
+            if (((UnityEngine.Object)enemy) != null) enemy.gameObject.SetActive(true);
+        }
+    }
+
+    public void DestroyAllUnits()
+    {
+        if (hero != null)
+        {
+            Destroy(hero.gameObject);
+            hero = null;
+        }
+        foreach (EnemyGridUnit enemy in enemies)
+        {
+            if (((UnityEngine.Object)enemy) != null) Destroy(enemy.gameObject);
         }
         enemies.Clear();
     }

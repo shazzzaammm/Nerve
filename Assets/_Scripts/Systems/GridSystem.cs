@@ -8,6 +8,7 @@ public class GridSystem : Singleton<GridSystem>
     [SerializeField] private Transform gridParent;
     [SerializeField] private GridCellView walkableCell, blockedCell;
     [SerializeField] private ChestGridCell chestCell;
+    [SerializeField] private ExitGridCell exitCell;
 
     [SerializeField] private Vector2 size;
 
@@ -24,15 +25,20 @@ public class GridSystem : Singleton<GridSystem>
     private void OnEnable()
     {
         ActionSystem.AttachPerformer<EndMatchGA>(EndMatchGAPerformer);
+        ActionSystem.AttachPerformer<ExitLevelGA>(ExitLevelGAPerformer);
     }
+
 
     private void OnDisable()
     {
         ActionSystem.DetachPerformer<EndMatchGA>();
+        ActionSystem.DetachPerformer<ExitLevelGA>();
     }
 
     public void Setup()
     {
+        DestroyLevel();
+        
         grid = new();
         heroSpawnPostions = new();
         enemySpawnPositions = new();
@@ -59,6 +65,7 @@ public class GridSystem : Singleton<GridSystem>
                 TileType.FLOOR => walkableCell,
                 TileType.WALL => blockedCell,
                 TileType.CHEST_SPAWN => chestCell,
+                TileType.EXIT => exitCell,
                 _ => blockedCell,
             };
             GridCellView cell = Instantiate(cellPrefab, gridParent.position + new Vector3(spacing.x * (pos.x - center.x), spacing.y * (pos.y - center.y)), Quaternion.identity, gridParent);
@@ -135,7 +142,7 @@ public class GridSystem : Singleton<GridSystem>
     public void SetEnemyPosition(EnemyGridUnit enemy, int index)
     {
         if (index < 0) index = 0;
-        if (index > enemySpawnPositions.Count) index %= enemySpawnPositions.Count;
+        if (index >= enemySpawnPositions.Count) index %= enemySpawnPositions.Count;
 
         Vector2 cell = enemySpawnPositions[index];
         enemy.Move(cell);
@@ -151,6 +158,26 @@ public class GridSystem : Singleton<GridSystem>
     public void DisableVisuals()
     {
         Interactions.instance.playerCanMoveOnGrid = false;
+        foreach (var cell in grid.Values){
+            cell.gameObject.SetActive(false);
+        }
+    }
+    
+    private void EnableVisuals(){
+        Interactions.instance.playerCanMoveOnGrid = true;
+        if (grid.Count == 0){
+            Setup();
+            return;
+        }
+
+        foreach (var cell in grid.Values){
+            cell.gameObject.SetActive(true);
+        }
+    }
+    
+    private void DestroyLevel(){
+        GridUnitSystem.instance.DestroyAllUnits();
+        if (grid == null) return;
         foreach (var cell in grid.Values)
         {
             Destroy(cell.gameObject);
@@ -160,9 +187,15 @@ public class GridSystem : Singleton<GridSystem>
 
     private IEnumerator EndMatchGAPerformer(EndMatchGA endMatchGA)
     {
-        Setup();
+        EnableVisuals();
+        GridUnitSystem.instance.EnableVisuals();
 
         yield return null;
     }
 
+    private IEnumerator ExitLevelGAPerformer(ExitLevelGA exitLevelGA)
+    {
+        Setup();
+        yield return null;
+    }
 }

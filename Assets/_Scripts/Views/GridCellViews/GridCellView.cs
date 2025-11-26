@@ -76,11 +76,21 @@ public abstract class GridCellView : MonoBehaviour
             occupiedUnits.Add(unit);
             foreach (GridUnit occupiedUnit in occupiedUnits)
             {
-                if (occupiedUnit is EnemyGridUnit enemyUnit) enemyDatas.Add(enemyUnit.data);
+                if (occupiedUnit is EnemyGridUnit enemyUnit)
+                {
+                    enemyDatas.Add(enemyUnit.data);
+                    Destroy(enemyUnit.gameObject);
+                }
             }
-            foreach (GridCellView cell in GridSystem.instance.GetCellNeighbors(this)){
-                foreach (GridUnit neighbor in cell.occupiedUnits){
-                    if (neighbor is EnemyGridUnit enemyNeighbor) enemyDatas.Add(enemyNeighbor.data);
+            foreach (GridCellView cell in GridSystem.instance.GetCellNeighbors(this))
+            {
+                foreach (GridUnit neighbor in cell.occupiedUnits)
+                {
+                    if (neighbor is EnemyGridUnit enemyNeighbor)
+                    {
+                        enemyDatas.Add(enemyNeighbor.data);
+                        Destroy(enemyNeighbor.gameObject);
+                    }
                 }
             }
             StartMatchGA startMatchGA = new(GridUnitSystem.instance.hero.data, enemyDatas);
