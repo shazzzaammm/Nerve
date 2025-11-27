@@ -9,6 +9,7 @@ public class ChestSystem : Singleton<ChestSystem>
    private List<CardRewardUI> cardRewards = new();
 
     public void Setup(List<CardData> cardDatas){
+        Interactions.instance.playerCanMoveOnGrid = false;
         foreach(CardData data in cardDatas){
             CardRewardUI cardReward = Instantiate(cardRewardPrefab, cardRewardParent.position, cardRewardParent.rotation, cardRewardParent);
             cardReward.Setup(new(data));
@@ -21,14 +22,21 @@ public class ChestSystem : Singleton<ChestSystem>
     public void ChooseCard(CardRewardUI cardReward){
         // TODO add card to deck using GA
         Debug.Log("Time to add " + cardReward.card.title + " to the deck");
-        Skip();
+        AddCardToDeckGA addCardToDeckGA = new(cardReward.card);
+        ActionSystem.instance.Perform(addCardToDeckGA);
+        TakeDown();
     }
 
     public void Skip(){
+        TakeDown();
+    }
+
+    private void TakeDown(){
         chestUI.SetActive(false);
         foreach (CardRewardUI cardReward in cardRewards){
             Destroy(cardReward.gameObject);
         }
         cardRewards.Clear();
+        Interactions.instance.playerCanMoveOnGrid = true;
     }
 }

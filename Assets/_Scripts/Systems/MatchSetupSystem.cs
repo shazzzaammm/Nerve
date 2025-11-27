@@ -10,6 +10,10 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
     [SerializeField] private GameObject matchUI;
     [SerializeField] private GameObject matchViews;
 
+    private void Start() {
+        deck = null;
+        SetupDeck(DataSystem.instance.heroes[0]);
+    }
 
     private void OnEnable()
     {
@@ -25,12 +29,24 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         matchUI.SetActive(false);
         matchViews.SetActive(false);
     }
+    private void SetupData(StartMatchGA startMatchGA)
+    {
+        heroData = startMatchGA.hero;
+        enemyDatas = startMatchGA.enemies;
+        SetupDeck(heroData);
+    }
+
+    private void SetupDeck(HeroData heroData)
+    {
+        if (deck == null)
+        {
+            deck = new List<CardData>(heroData.deck);
+        }
+    }
     private IEnumerator StartMatchGAPerformer(StartMatchGA startMatchGA)
     {
         // data
-        heroData = startMatchGA.hero;
-        enemyDatas = startMatchGA.enemies;
-        deck = new List<CardData>(heroData.deck);
+        SetupData(startMatchGA);
 
         // visuals
         matchUI.SetActive(true);
@@ -48,7 +64,7 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
         CardSystem.instance.Setup(heroData.deck);
         DrawCardsGA drawCardsGA = new(CardSystem.instance.handSize);
         ActionSystem.instance.AddReaction(drawCardsGA);
-        
+
         // mana
         RefillManaGA refillManaGA = new();
         ActionSystem.instance.AddReaction(refillManaGA);
@@ -58,5 +74,10 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
     public void RemoveCardFromDeck(Card card)
     {
         deck.Remove(card.data);
+    }
+
+    public void AddCardToDeck(Card card)
+    {
+        deck.Add(card.data);
     }
 }

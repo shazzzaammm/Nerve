@@ -25,6 +25,8 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.AttachPerformer<DiscardCardsGA>(DiscardCardsPerformer);
         ActionSystem.AttachPerformer<PlayCardGA>(PlayCardPerformer);
         ActionSystem.AttachPerformer<DestroyCardGA>(DestroyCardPerformer);
+        ActionSystem.AttachPerformer<AddCardToDeckGA>(AddCardPerformer);
+        
 
         ActionSystem.SubscribeReaction<DiscardCardsGA>(DiscardCardPostReaction, ReactionTiming.POST);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
@@ -36,6 +38,7 @@ public class CardSystem : Singleton<CardSystem>
         ActionSystem.DetachPerformer<DrawCardsGA>();
         ActionSystem.DetachPerformer<DiscardCardsGA>();
         ActionSystem.DetachPerformer<DestroyCardGA>();
+        ActionSystem.DetachPerformer<AddCardToDeckGA>();
         ActionSystem.DetachPerformer<PlayCardGA>();
 
         ActionSystem.UnsubscribeReaction<DiscardCardsGA>(DiscardCardPostReaction, ReactionTiming.POST);
@@ -125,6 +128,13 @@ public class CardSystem : Singleton<CardSystem>
         Card card = destroyCardGA.card;
         discardPile.Remove(card);
         MatchSetupSystem.instance.RemoveCardFromDeck(card);
+        yield return null;
+    }
+
+    private IEnumerator AddCardPerformer(AddCardToDeckGA addCardToDeckGA){
+        Card card = addCardToDeckGA.card;
+        drawPile.Add(card);
+        MatchSetupSystem.instance.AddCardToDeck(card);
         yield return null;
     }
 

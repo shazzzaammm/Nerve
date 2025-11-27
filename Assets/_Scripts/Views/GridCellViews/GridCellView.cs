@@ -92,7 +92,9 @@ public abstract class GridCellView : MonoBehaviour
                         Destroy(enemyNeighbor.gameObject);
                     }
                 }
+                cell.occupiedUnits.Clear();
             }
+            this.occupiedUnits.Clear();
             StartMatchGA startMatchGA = new(GridUnitSystem.instance.hero.data, enemyDatas);
             ActionSystem.instance.AddReaction(startMatchGA);
         }
