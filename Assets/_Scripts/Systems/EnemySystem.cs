@@ -7,45 +7,52 @@ public class EnemySystem : Singleton<EnemySystem>
 {
     [SerializeField] private EnemyBoardView enemyBoardView;
     public List<EnemyView> enemies => enemyBoardView.enemyViews;
-    void OnEnable(){
+    void OnEnable()
+    {
         ActionSystem.AttachPerformer<EnemyTurnGA>(EnemyTurnPerformer);
         ActionSystem.AttachPerformer<EnemyAttackHeroGA>(AttackHeroPerformer);
         ActionSystem.AttachPerformer<KillEnemyGA>(KillEnemyPerformer);
     }
 
-    void OnDisable(){
+    void OnDisable()
+    {
         ActionSystem.DetachPerformer<EnemyTurnGA>();
         ActionSystem.DetachPerformer<EnemyAttackHeroGA>();
         ActionSystem.DetachPerformer<KillEnemyGA>();
     }
-    
-    public void Setup(List<EnemyData> enemyDatas){
-        foreach (EnemyData data in enemyDatas){
+
+    public void Setup(List<EnemyData> enemyDatas)
+    {
+        foreach (EnemyData data in enemyDatas)
+        {
             enemyBoardView.AddEnemy(data);
         }
     }
-    
-    private IEnumerator EnemyTurnPerformer(EnemyTurnGA enemyTurnGA){
-        foreach (EnemyView enemy in enemyBoardView.enemyViews){
-            EnemyAttackHeroGA enemyAttackHeroGA = new(enemy);
-            ActionSystem.instance.AddReaction(enemyAttackHeroGA);
+
+    private IEnumerator EnemyTurnPerformer(EnemyTurnGA enemyTurnGA)
+    {
+        foreach (EnemyView enemy in enemyBoardView.enemyViews)
+        {
+            enemy.PerformTurn();
         }
         yield return new WaitForSeconds(.5f);
     }
-    
-    private IEnumerator AttackHeroPerformer(EnemyAttackHeroGA enemyAttackHeroGA){
+
+    private IEnumerator AttackHeroPerformer(EnemyAttackHeroGA enemyAttackHeroGA)
+    {
         EnemyView attacker = enemyAttackHeroGA.attacker;
         Vector3 originalPosition = attacker.transform.position;
         Tween tween = attacker.transform.DOMove(originalPosition - (originalPosition.normalized * 2f), .15f);
         yield return tween.WaitForCompletion();
         tween = attacker.transform.DOMove(originalPosition, .5f);
         yield return tween.WaitForCompletion();
-        DealDamageGA dealDamageGA = new(attacker.attackPower, new() { HeroSystem.instance.heroView },enemyAttackHeroGA.attacker);
+        DealDamageGA dealDamageGA = new(enemyAttackHeroGA.damage, new() { HeroSystem.instance.heroView }, enemyAttackHeroGA.attacker);
         ActionSystem.instance.AddReaction(dealDamageGA);
     }
-    
-    private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA){
-        yield return enemyBoardView.RemoveEnemy(killEnemyGA.target);        
+
+    private IEnumerator KillEnemyPerformer(KillEnemyGA killEnemyGA)
+    {
+        yield return enemyBoardView.RemoveEnemy(killEnemyGA.target);
 
     }
 }

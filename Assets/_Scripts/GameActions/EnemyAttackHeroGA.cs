@@ -8,9 +8,11 @@ public class EnemyAttackHeroGA : GameAction, IHaveCaster
     public CombatantView caster { get; private set; }
 
     public List<CombatantView> targets;
+    public int damage;
 
-    public EnemyAttackHeroGA(EnemyView attacker){
+    public EnemyAttackHeroGA(EnemyView attacker, int damage){
         this.attacker = attacker;
+        this.damage = damage;
         caster = attacker;
     }
 
