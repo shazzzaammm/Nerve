@@ -20,7 +20,6 @@ public class ChestSystem : Singleton<ChestSystem>
     }
     
     public void ChooseCard(CardRewardUI cardReward){
-        // TODO add card to deck using GA
         Debug.Log("Time to add " + cardReward.card.title + " to the deck");
         AddCardToDeckGA addCardToDeckGA = new(cardReward.card);
         ActionSystem.instance.Perform(addCardToDeckGA);

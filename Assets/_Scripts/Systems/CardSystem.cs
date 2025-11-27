@@ -133,7 +133,6 @@ public class CardSystem : Singleton<CardSystem>
 
     private IEnumerator AddCardPerformer(AddCardToDeckGA addCardToDeckGA){
         Card card = addCardToDeckGA.card;
-        drawPile.Add(card);
         MatchSetupSystem.instance.AddCardToDeck(card);
         yield return null;
     }

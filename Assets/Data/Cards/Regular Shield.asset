@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
+  m_Name: Regular Shield
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  <title>k__BackingField: Regular Shield
+  <description>k__BackingField: i have nothing creative to put here, its +5 shield
+    though
+  <cost>k__BackingField: 1
+  <image>k__BackingField: {fileID: 2389193319765324094, guid: a01a00f1f025eeeb79d64e722460f0df, type: 3}
+  <manualTargetEffect>k__BackingField:
+    rid: -2
+  <otherEffects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 7493168596157464654
+    <effect>k__BackingField:
+      rid: 7493168596157464657
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7493168596157464654
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 7493168596157464657
+      type: {class: AddShieldEffect, ns: , asm: Assembly-CSharp}
+      data:
+        shieldAmount: 5

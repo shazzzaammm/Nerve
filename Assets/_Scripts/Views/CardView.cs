@@ -21,7 +21,7 @@ public class CardView : MonoBehaviour
     public void Setup(Card card)
     {
         this.card = card;
-        Debug.Log("Card: " + card.title);
+        Debug.Log("Card: " + card.data.name);
         title.text = card.title;
         Debug.Log("Setup " + card.title + " successfully");
         description.text = card.description;

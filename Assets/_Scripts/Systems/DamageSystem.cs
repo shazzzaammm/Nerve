@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,15 +7,25 @@ public class DamageSystem : Singleton<DamageSystem>
     void OnEnable()
     {
         ActionSystem.AttachPerformer<DealDamageGA>(DealDamagePerformer);
+        ActionSystem.AttachPerformer<HealGA>(HealPerformer);
         ActionSystem.AttachPerformer<AddShieldGA>(AddShieldGAPerformer);
-
     }
+
     void OnDisable()
     {
         ActionSystem.DetachPerformer<DealDamageGA>();
+        ActionSystem.DetachPerformer<HealGA>();
         ActionSystem.DetachPerformer<AddShieldGA>();
     }
 
+    private IEnumerator HealPerformer(HealGA healGA)
+    {
+        foreach (var target in healGA.targets)
+        {
+            target.HealDamage(healGA.amount);
+        }
+        yield return null;
+    }
     private IEnumerator DealDamagePerformer(DealDamageGA dealDamageGA)
     {
         foreach (CombatantView target in dealDamageGA.targets)
@@ -36,10 +47,11 @@ public class DamageSystem : Singleton<DamageSystem>
         yield return null;
     }
 
-    private IEnumerator AddShieldGAPerformer(AddShieldGA addShieldGA){
-        foreach (CombatantView target in addShieldGA.targets){
+    private IEnumerator AddShieldGAPerformer(AddShieldGA addShieldGA)
+    {
+        foreach (CombatantView target in addShieldGA.targets)
+        {
             target.AddShield(addShieldGA.amount);
-            Debug.Log("MOVE THIS TO ITS OWN SYSTEM OR SOMETHING YOU MORON!!!!!!! (add shield performer btw)");
         }
         yield return null;
     }

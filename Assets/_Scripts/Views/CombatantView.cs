@@ -38,7 +38,8 @@ public class CombatantView : MonoBehaviour
         if (currentShield > 0) currentShield -= amount;
         else currentHealth -= amount;
 
-        if (currentShield < 0){
+        if (currentShield < 0)
+        {
             currentHealth += currentShield;
             currentShield = 0;
         }
@@ -53,7 +54,25 @@ public class CombatantView : MonoBehaviour
         transform.DOShakePosition(.5f, .25f);
     }
 
-    public void AddShield(int amount){
+    public void HealDamage(int amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        UpdateHealthText();
+        UpdateShieldText();
+
+        transform.DOMoveY(transform.position.y + .5f, .25f).onComplete += () =>
+        {
+            transform.DOMoveY(transform.position.y - .5f, .25f);
+        };
+    }
+
+    public void AddShield(int amount)
+    {
         currentShield += amount;
         UpdateShieldText();
     }
