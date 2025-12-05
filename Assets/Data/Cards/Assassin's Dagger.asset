@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
+  m_Name: Assassin's Dagger
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  <title>k__BackingField: Assassin's Dagger
+  <description>k__BackingField: A fine dagger with a deep fuller, letting the poison
+    stored in the hilt to flow upon attacking.
+  <cost>k__BackingField: 1
+  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
+  <manualTargetEffect>k__BackingField:
+    rid: 603324146210046057
+  <otherEffects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324146210046055
+    <effect>k__BackingField:
+      rid: 603324146210046056
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046055
+      type: {class: TargetedEnemyTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046056
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 1
+        stackCount: 2
+    - rid: 603324146210046057
+      type: {class: CriticalHitEffect, ns: , asm: Assembly-CSharp}
+      data:
+        critChance: 0.1
+        critDamage: 5
+        regularDamage: 2

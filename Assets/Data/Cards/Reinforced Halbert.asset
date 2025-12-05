@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
+  m_Name: Reinforced Halbert
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  <title>k__BackingField: Reinforced Halbert
+  <description>k__BackingField: A full metal halbert. Though rather heavy, the tip,
+    blade, and longer handle allows a higher level of finesse.
+  <cost>k__BackingField: 2
+  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
+  <manualTargetEffect>k__BackingField:
+    rid: 603324146210046053
+  <otherEffects>k__BackingField: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046053
+      type: {class: CriticalHitEffect, ns: , asm: Assembly-CSharp}
+      data:
+        critChance: 0.1
+        critDamage: 3
+        regularDamage: 6

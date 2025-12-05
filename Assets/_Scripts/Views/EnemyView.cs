@@ -58,9 +58,14 @@ public class EnemyView : CombatantView
             prefix = "ATK:";
             amount = dealDamageGA.amount.ToString();
         }
-        else if (gameAction is AddShieldGA)
+        else if (gameAction is AddStatusEffectGA statusEffectGA)
         {
-            prefix = "Shielding";
+            if (statusEffectGA.statusEffectType == StatusEffectType.Armor){
+                prefix = "Shielding";
+            }
+            else{
+                prefix = "????";
+            }
         }
         else if (gameAction is HealGA)
         {
