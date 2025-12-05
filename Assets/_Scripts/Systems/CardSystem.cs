@@ -30,6 +30,7 @@ public class CardSystem : Singleton<CardSystem>
 
         ActionSystem.SubscribeReaction<DiscardCardsGA>(DiscardCardPostReaction, ReactionTiming.POST);
         ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
+        ActionSystem.SubscribeReaction<EnemyTurnGA>(EnemyTurnPreReaction, ReactionTiming.PRE);
         ActionSystem.SubscribeReaction<EndMatchGA>(EndMatchGAPreReaction, ReactionTiming.PRE);
     }
 
@@ -43,13 +44,16 @@ public class CardSystem : Singleton<CardSystem>
 
         ActionSystem.UnsubscribeReaction<DiscardCardsGA>(DiscardCardPostReaction, ReactionTiming.POST);
         ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPostReaction, ReactionTiming.POST);
+        ActionSystem.UnsubscribeReaction<EnemyTurnGA>(EnemyTurnPreReaction, ReactionTiming.PRE);
         ActionSystem.UnsubscribeReaction<EndMatchGA>(EndMatchGAPreReaction, ReactionTiming.PRE);
 
+    }
+    private void EnemyTurnPreReaction(EnemyTurnGA enemyTurnGA){
+        HeroSystem.instance.EnemyTurnPostReaction();
     }
 
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
-        HeroSystem.instance.EnemyTurnPostReaction();
         int cardsToDraw = handSize - hand.Count;
         if (cardsToDraw <= 0) return;
 

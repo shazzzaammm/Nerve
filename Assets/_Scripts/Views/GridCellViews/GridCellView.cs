@@ -57,6 +57,7 @@ public abstract class GridCellView : MonoBehaviour
 
     protected void OnClick()
     {
+        if (!Interactions.instance.PlayerCanInteract()) return;
         if (!Interactions.instance.playerCanMoveOnGrid) return;
         if (!isWalkable()) return;
         if (occupiedUnits.Count != 0 && occupiedUnits.Contains(GridUnitSystem.instance.hero)) return;

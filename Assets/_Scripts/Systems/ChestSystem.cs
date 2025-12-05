@@ -6,6 +6,7 @@ public class ChestSystem : Singleton<ChestSystem>
     [SerializeField] private GameObject chestUI;
     [SerializeField] private Transform cardRewardParent;
     [SerializeField] private CardRewardUI cardRewardPrefab;
+    public bool isChoosingReward {get; private set;}= false;
    private List<CardRewardUI> cardRewards = new();
 
     public void Setup(List<CardData> cardDatas){
@@ -17,6 +18,7 @@ public class ChestSystem : Singleton<ChestSystem>
         }
 
         chestUI.SetActive(true);
+        isChoosingReward = true;
     }
     
     public void ChooseCard(CardRewardUI cardReward){
@@ -32,6 +34,7 @@ public class ChestSystem : Singleton<ChestSystem>
 
     private void TakeDown(){
         chestUI.SetActive(false);
+        isChoosingReward = false;
         foreach (CardRewardUI cardReward in cardRewards){
             Destroy(cardReward.gameObject);
         }

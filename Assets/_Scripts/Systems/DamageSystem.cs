@@ -38,7 +38,8 @@ public class DamageSystem : Singleton<DamageSystem>
                 }
                 else
                 {
-                    // Player dies
+                    PlayerKilledGA playerKilledGA = new();
+                    ActionSystem.instance.AddReaction(playerKilledGA);
                 }
             }
         }
