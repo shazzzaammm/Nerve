@@ -49,6 +49,7 @@ public class CardSystem : Singleton<CardSystem>
 
     private void EnemyTurnPostReaction(EnemyTurnGA enemyTurnGA)
     {
+        HeroSystem.instance.EnemyTurnPostReaction();
         int cardsToDraw = handSize - hand.Count;
         if (cardsToDraw <= 0) return;
 

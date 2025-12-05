@@ -23,7 +23,8 @@ public class CombatantView : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        int currentShield = GetStatusEffectStacks(StatusEffectType.Armor);
+        int oldShield = GetStatusEffectStacks(StatusEffectType.Armor);
+        int currentShield = oldShield;
         if (currentShield > 0) currentShield -= amount;
         else currentHealth -= amount;
 
@@ -37,6 +38,7 @@ public class CombatantView : MonoBehaviour
             currentHealth = 0;
         }
 
+        RemoveStatusEffect(StatusEffectType.Armor, oldShield - currentShield);
         UpdateHealthText();
         statusEffectsUI.UpdateStatusEffectsUI(StatusEffectType.Armor, currentShield);
 

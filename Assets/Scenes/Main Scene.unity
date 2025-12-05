@@ -2146,6 +2146,7 @@ Transform:
   - {fileID: 1937327205}
   - {fileID: 676403825}
   - {fileID: 1806913715}
+  - {fileID: 2010187456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103249288
@@ -3452,8 +3453,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StatusEffectsUI
   statusEffectPrefab: {fileID: 4908682604634450279, guid: 6180950c9ae97c299a67a6c29a374f7a, type: 3}
-  armorSprite: {fileID: 21300000, guid: 7e50f0b0980ab26149748647024cb089, type: 3}
-  poisonSprite: {fileID: 21300000, guid: 7e50f0b0980ab26149748647024cb089, type: 3}
+  armorSprite: {fileID: 21300000, guid: 2fc4b81e7bf55684ba7143e3b47a7515, type: 3}
+  poisonSprite: {fileID: 21300000, guid: e4e1e9ab8aad1444faeba8b0b9a7d765, type: 3}
 --- !u!114 &1660540684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4583,6 +4584,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1997368308}
   m_CullTransparentMesh: 1
+--- !u!1 &2010187455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2010187456}
+  - component: {fileID: 2010187457}
+  m_Layer: 0
+  m_Name: PoisonSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2010187456
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010187455}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1082932322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2010187457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010187455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e4db4eedb8295e038e36cef3df74383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoisonSystem
 --- !u!1 &2010471000
 GameObject:
   m_ObjectHideFlags: 0

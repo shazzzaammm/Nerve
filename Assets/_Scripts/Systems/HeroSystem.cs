@@ -8,4 +8,10 @@ public class HeroSystem : Singleton<HeroSystem>
     public void Setup(HeroData heroData){
         heroView.Setup(heroData);
     }
+
+    public void EnemyTurnPostReaction(){
+        if (heroView.GetStatusEffectStacks(StatusEffectType.Poison) > 0){
+            ActionSystem.instance.AddReaction(new ApplyPoisonGA(heroView));
+        }
+    }
 }

@@ -34,6 +34,10 @@ public class EnemySystem : Singleton<EnemySystem>
         foreach (EnemyView enemy in enemyBoardView.enemyViews)
         {
             enemy.PerformTurn();
+            if (enemy.GetStatusEffectStacks(StatusEffectType.Poison) > 0)
+            {
+                ActionSystem.instance.AddReaction(new ApplyPoisonGA(enemy));
+            }
         }
         yield return new WaitForSeconds(.5f);
     }
