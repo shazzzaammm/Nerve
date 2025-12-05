@@ -18,20 +18,21 @@ public class StatusEffectsUI : MonoBehaviour
                 statusEffectUIs.Remove(statusEffectType);
                 Destroy(statusEffectUI.gameObject);
             }
-            else
+        }
+        else
+        {
+            if (!statusEffectUIs.ContainsKey(statusEffectType))
             {
-                if (!statusEffectUIs.ContainsKey(statusEffectType))
-                {
-                    StatusEffectUI statusEffectUI = Instantiate(statusEffectPrefab, transform);
-                    statusEffectUIs.Add(statusEffectType, statusEffectUI);
-                }
-                Sprite sprite = GetSpriteByType(statusEffectType);
-                statusEffectUIs[statusEffectType].Set(sprite, stackCount);
+                StatusEffectUI statusEffectUI = Instantiate(statusEffectPrefab, transform.position, transform.rotation, transform);
+                statusEffectUIs.Add(statusEffectType, statusEffectUI);
             }
+            Sprite sprite = GetSpriteByType(statusEffectType);
+            statusEffectUIs[statusEffectType].Set(sprite, stackCount);
         }
     }
-    
-    private Sprite GetSpriteByType(StatusEffectType type){
+
+    private Sprite GetSpriteByType(StatusEffectType type)
+    {
 
         return type switch
         {

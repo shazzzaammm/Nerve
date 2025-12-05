@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
+  m_Name: Corroded Pike
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  <title>k__BackingField: Corroded Pike
+  <description>k__BackingField: A large spear, its wood rotted and tip dulled. You
+    dont know how long it will last.
+  <cost>k__BackingField: 2
+  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
+  <manualTargetEffect>k__BackingField:
+    rid: 603324146210046043
+  <otherEffects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324146210046044
+    <effect>k__BackingField:
+      rid: 603324146210046045
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046043
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 3
+    - rid: 603324146210046044
+      type: {class: NoTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046045
+      type: {class: DestroyCardEffect, ns: , asm: Assembly-CSharp}
+      data:
+        destroyCardMode:
+          rid: 603324146210046046
+    - rid: 603324146210046046
+      type: {class: DestroySelfDCM, ns: , asm: Assembly-CSharp}
+      data: 

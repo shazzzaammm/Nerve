@@ -16,3 +16,30 @@ MonoBehaviour:
   <initialShield>k__BackingField: 10
   <attackPower>k__BackingField: 2
   <image>k__BackingField: {fileID: 21300000, guid: 8942bfa37527f4e468051d44d036d6c3, type: 3}
+  <effects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324146210046028
+    <effect>k__BackingField:
+      rid: 603324146210046029
+  - <targetMode>k__BackingField:
+      rid: 603324146210046026
+    <effect>k__BackingField:
+      rid: 603324146210046027
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046026
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046027
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 3
+    - rid: 603324146210046028
+      type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046029
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 0
+        stackCount: 5

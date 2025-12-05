@@ -10,28 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
-  m_Name: Arrow Rain
+  m_Name: Coated Dagger
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  <title>k__BackingField: Arrow Rain
-  <description>k__BackingField: Deals 2 damage to all enemies
-  <cost>k__BackingField: 2
-  <image>k__BackingField: {fileID: 194935847770418729, guid: a3602fc1ff08c98bd97d6a7d8b88dbad, type: 3}
+  <title>k__BackingField: Coated Dagger
+  <description>k__BackingField: A dagger coated in a weak poison for extra damage.
+  <cost>k__BackingField: 1
+  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
   <manualTargetEffect>k__BackingField:
-    rid: -2
+    rid: 603324146210046052
   <otherEffects>k__BackingField:
   - <targetMode>k__BackingField:
-      rid: 8593481100546015304
+      rid: 603324146210046049
     <effect>k__BackingField:
-      rid: 8593481100546015305
+      rid: 603324146210046051
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 8593481100546015304
-      type: {class: AllEnemiesTM, ns: , asm: Assembly-CSharp}
+    - rid: 603324146210046049
+      type: {class: TargetedEnemyTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 8593481100546015305
+    - rid: 603324146210046051
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 1
+        stackCount: 2
+    - rid: 603324146210046052
       type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
         damageAmount: 2

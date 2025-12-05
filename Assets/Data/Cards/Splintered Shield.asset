@@ -23,16 +23,17 @@ MonoBehaviour:
   - <targetMode>k__BackingField:
       rid: 1995634610906333259
     <effect>k__BackingField:
-      rid: 1995634610906333260
+      rid: 603324146210046038
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 603324146210046038
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 0
+        stackCount: 2
     - rid: 1995634610906333259
       type: {class: HeroTM, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 1995634610906333260
-      type: {class: AddShieldEffect, ns: , asm: Assembly-CSharp}
-      data:
-        shieldAmount: 1

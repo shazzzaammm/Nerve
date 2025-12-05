@@ -12,6 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7425b7f53d88a4ee28c21928c0eae850, type: 3}
   m_Name: Red Slime
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  <health>k__BackingField: 15
+  <health>k__BackingField: 12
+  <initialShield>k__BackingField: 0
   <attackPower>k__BackingField: 4
   <image>k__BackingField: {fileID: 21300000, guid: 3cd7fbca6c6301b489f9629efaebb2ed, type: 3}
+  <effects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324146210046034
+    <effect>k__BackingField:
+      rid: 603324146210046035
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046034
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046035
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 6

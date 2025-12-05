@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
+  m_Name: Broken Sword
+  m_EditorClassIdentifier: Assembly-CSharp::CardData
+  <title>k__BackingField: Broken Sword
+  <description>k__BackingField: A sword, the blade has been broken in half. Even
+    then, it still looks reliable.
+  <cost>k__BackingField: 1
+  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
+  <manualTargetEffect>k__BackingField:
+    rid: 603324146210046042
+  <otherEffects>k__BackingField: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046042
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 2

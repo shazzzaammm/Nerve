@@ -8,14 +8,12 @@ public class DamageSystem : Singleton<DamageSystem>
     {
         ActionSystem.AttachPerformer<DealDamageGA>(DealDamagePerformer);
         ActionSystem.AttachPerformer<HealGA>(HealPerformer);
-        ActionSystem.AttachPerformer<AddShieldGA>(AddShieldGAPerformer);
     }
 
     void OnDisable()
     {
         ActionSystem.DetachPerformer<DealDamageGA>();
         ActionSystem.DetachPerformer<HealGA>();
-        ActionSystem.DetachPerformer<AddShieldGA>();
     }
 
     private IEnumerator HealPerformer(HealGA healGA)
@@ -43,15 +41,6 @@ public class DamageSystem : Singleton<DamageSystem>
                     // Player dies
                 }
             }
-        }
-        yield return null;
-    }
-
-    private IEnumerator AddShieldGAPerformer(AddShieldGA addShieldGA)
-    {
-        foreach (CombatantView target in addShieldGA.targets)
-        {
-            target.AddShield(addShieldGA.amount);
         }
         yield return null;
     }

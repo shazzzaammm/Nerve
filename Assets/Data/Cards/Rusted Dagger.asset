@@ -10,20 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b8ef541c834c3c3658f3e86a41a4ca1d, type: 3}
-  m_Name: Attack
+  m_Name: Rusted Dagger
   m_EditorClassIdentifier: Assembly-CSharp::CardData
-  <title>k__BackingField: Straight Sword
-  <description>k__BackingField: A standard issue sword from the village from above.
-    Somehow made its way into the dungeon.
+  <title>k__BackingField: Rusted Dagger
+  <description>k__BackingField: A dagger, its blade is dull and rusted, though this
+    could be a benefit when striking.
   <cost>k__BackingField: 1
   <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
   <manualTargetEffect>k__BackingField:
-    rid: 1995634610906333261
-  <otherEffects>k__BackingField: []
+    rid: 603324146210046039
+  <otherEffects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324146210046040
+    <effect>k__BackingField:
+      rid: 603324146210046041
   references:
     version: 2
     RefIds:
-    - rid: 1995634610906333261
+    - rid: 603324146210046039
       type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
       data:
-        damageAmount: 4
+        damageAmount: 1
+    - rid: 603324146210046040
+      type: {class: TargetedEnemyTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046041
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 1
+        stackCount: 2

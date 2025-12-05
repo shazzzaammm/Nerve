@@ -20,7 +20,7 @@ public class EnemyView : CombatantView
 
     public void Setup(EnemyData enemyData)
     {
-        base.SetupBase(enemyData.health, enemyData.initialShield);
+        base.SetupBase(enemyData.health);
         spriteRenderer.sprite = enemyData.image;
         effects = enemyData.effects;
         index = 0;

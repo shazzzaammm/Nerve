@@ -4,6 +4,7 @@ public class ManualTargetingSystem : Singleton<ManualTargetingSystem>
 {
     [SerializeField] private ArrowView arrowView;
     [SerializeField] private LayerMask targetLayerMask;
+    public CombatantView targetedEnemyView {get; private set;}
     public void StartTargeting(Vector3 startPosition)
     {
         arrowView.gameObject.SetActive(true);
@@ -17,10 +18,10 @@ public class ManualTargetingSystem : Singleton<ManualTargetingSystem>
 
         if (hit && hit.collider != null && hit.transform.TryGetComponent<EnemyView>(out EnemyView enemyView))
         {
+            targetedEnemyView = enemyView;
             return enemyView;
         }
-
+        targetedEnemyView = null;
         return null;
-
     }
 }
