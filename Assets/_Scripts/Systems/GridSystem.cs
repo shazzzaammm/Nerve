@@ -1,9 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
-using UnityEngine.TextCore;
 
 public class GridSystem : Singleton<GridSystem>
 {
@@ -21,7 +19,9 @@ public class GridSystem : Singleton<GridSystem>
     Dictionary<Vector2, GridCellView> grid;
     List<Vector2> enemySpawnPositions;
     List<Vector2> heroSpawnPostions;
-    Vector2 bossSpawnPosition = Vector2.negativeInfinity;
+    private static Vector2 nullVector = Vector2.one * Int32.MaxValue;
+    Vector2 bossSpawnPosition = nullVector;
+    public bool bossTime {get; private set;} = false;
     private int levelsCleared = 0;
 
     void Start()
@@ -50,17 +50,17 @@ public class GridSystem : Singleton<GridSystem>
         heroSpawnPostions = new();
         enemySpawnPositions = new();
         Texture2D chosenLayout;
-        if (levelsCleared == 10)
+        if (levelsCleared == 4)
         {
             chosenLayout = bossLayout;
         }
-        else if (levelsCleared == 5)
+        else if (levelsCleared == 2)
         {
             chosenLayout = subBossLayout;
         }
         else
         {
-            int randomLayout = Random.Range(0, layouts.Length);
+            int randomLayout = UnityEngine.Random.Range(0, layouts.Length);
             chosenLayout = layouts[randomLayout];
         }
         Dictionary<Vector2Int, TileType> layout = LevelGenerationSystem.instance.Generate(chosenLayout);
@@ -115,7 +115,9 @@ public class GridSystem : Singleton<GridSystem>
             EnemyData chosenEnemy = possibleEnemyDatas.GetRandom();
             chosenEnemyDatas.Add(chosenEnemy);
         }
-        GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], chosenEnemyDatas, bossSpawnPosition != Vector2.negativeInfinity);
+        bossTime = bossSpawnPosition != nullVector;
+        Debug.Log("Bossitime? " + bossTime + " because pos is " + bossSpawnPosition);
+        GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], chosenEnemyDatas, bossTime);
     }
     public GridCellView GetCellAtPosition(Vector2 pos)
     {
@@ -152,14 +154,14 @@ public class GridSystem : Singleton<GridSystem>
 
     public void SetRandomHeroPosition()
     {
-        int rand = Random.Range(0, heroSpawnPostions.Count);
+        int rand = UnityEngine.Random.Range(0, heroSpawnPostions.Count);
         Vector2 cell = heroSpawnPostions[rand];
         GridUnitSystem.instance.hero.Move(cell);
     }
 
     public void SetRandomEnemyPosition(EnemyGridUnit enemy)
     {
-        int rand = Random.Range(0, enemySpawnPositions.Count);
+        int rand = UnityEngine.Random.Range(0, enemySpawnPositions.Count);
         Vector2 cell = enemySpawnPositions[rand];
         enemy.Move(cell);
     }
@@ -175,10 +177,10 @@ public class GridSystem : Singleton<GridSystem>
 
     public void SetBossPosition(EnemyGridUnit boss)
     {
-        if (bossSpawnPosition != Vector2.negativeInfinity){
+        if (bossSpawnPosition != nullVector){
             boss.Move(bossSpawnPosition);
         }
-        bossSpawnPosition = Vector2.negativeInfinity;
+        bossSpawnPosition = nullVector;
     }
 
     private void OnDrawGizmosSelected()

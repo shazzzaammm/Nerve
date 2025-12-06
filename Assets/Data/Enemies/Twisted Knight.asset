@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7425b7f53d88a4ee28c21928c0eae850, type: 3}
+  m_Name: Twisted Knight
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  <health>k__BackingField: 30
+  <initialShield>k__BackingField: 0
+  <attackPower>k__BackingField: 0
+  <image>k__BackingField: {fileID: -3989128737447354582, guid: 2855a44082cdf7302ac4229c0e616ddc, type: 3}
+  <effects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324158693867884
+    <effect>k__BackingField:
+      rid: 603324158693867883
+  - <targetMode>k__BackingField:
+      rid: 603324158693867885
+    <effect>k__BackingField:
+      rid: 603324158693867878
+  - <targetMode>k__BackingField:
+      rid: 603324158693867889
+    <effect>k__BackingField:
+      rid: 603324158693867888
+  - <targetMode>k__BackingField:
+      rid: 603324158693867890
+    <effect>k__BackingField:
+      rid: 603324158693867891
+  - <targetMode>k__BackingField:
+      rid: 603324158693867892
+    <effect>k__BackingField:
+      rid: 603324158693867893
+  - <targetMode>k__BackingField:
+      rid: 603324158693867894
+    <effect>k__BackingField:
+      rid: 603324158693867895
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324158693867878
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 8
+    - rid: 603324158693867883
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 1
+        stackCount: 15
+    - rid: 603324158693867884
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324158693867885
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324158693867888
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        healAmount: 5
+    - rid: 603324158693867889
+      type: {class: CasterTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324158693867890
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324158693867891
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 9
+    - rid: 603324158693867892
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324158693867893
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 10
+    - rid: 603324158693867894
+      type: {class: CasterTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324158693867895
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 0
+        stackCount: 10

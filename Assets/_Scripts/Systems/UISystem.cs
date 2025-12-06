@@ -39,6 +39,7 @@ public class UISystem : Singleton<UISystem>
 
     public void TogglePauseMenu(bool enable)
     {
+        if (gameOver) return;
         pauseMenu.SetActive(enable);
         paused = enable;
     }
