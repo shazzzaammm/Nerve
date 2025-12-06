@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HeroData
   <health>k__BackingField: 20
   deck:
-  - {fileID: 11400000, guid: e478edd3abf6513d3adc210028c369fa, type: 2}
-  - {fileID: 11400000, guid: e478edd3abf6513d3adc210028c369fa, type: 2}
-  - {fileID: 11400000, guid: 99d64174ab13b14ebb79e7ed0c0aac58, type: 2}
-  - {fileID: 11400000, guid: 99d64174ab13b14ebb79e7ed0c0aac58, type: 2}
-  - {fileID: 11400000, guid: 4b6dd48adf85a29019c512907057cfda, type: 2}
-  - {fileID: 11400000, guid: 4b6dd48adf85a29019c512907057cfda, type: 2}
+  - {fileID: 11400000, guid: 0f34405b5247e837c92fe2da80a42659, type: 2}
+  - {fileID: 11400000, guid: 24329c0134beab18cafca9969dc16d12, type: 2}
+  - {fileID: 11400000, guid: 6729b64d645c05095afbc1ff078e0734, type: 2}
+  - {fileID: 11400000, guid: bc76df917000b0e9ca9651cc7804961f, type: 2}
+  - {fileID: 11400000, guid: 878b73b7205c94238b5ef2bb8e9e7d67, type: 2}
+  - {fileID: 11400000, guid: a391e38b8b807fe7a9c31e164545598c, type: 2}
+  - {fileID: 11400000, guid: 45f9329e60101f4acb2ecbd17bf9c0d9, type: 2}
   - {fileID: 11400000, guid: 17da7a053baa9c08ea46585459fd529f, type: 2}
   - {fileID: 11400000, guid: b6c3a53f81b936861b78b19b454f530d, type: 2}
-  - {fileID: 11400000, guid: b6c3a53f81b936861b78b19b454f530d, type: 2}
+  - {fileID: 11400000, guid: e478edd3abf6513d3adc210028c369fa, type: 2}
+  - {fileID: 11400000, guid: 99d64174ab13b14ebb79e7ed0c0aac58, type: 2}
+  - {fileID: 11400000, guid: 4b6dd48adf85a29019c512907057cfda, type: 2}
   image: {fileID: 21300000, guid: 67ab317447da076e58422dbb6fb196e7, type: 3}

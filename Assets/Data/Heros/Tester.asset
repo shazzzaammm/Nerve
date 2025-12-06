@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5981f331f1d46caa93d2abe64bf5a87, type: 3}
+  m_Name: Tester
+  m_EditorClassIdentifier: Assembly-CSharp::HeroData
+  <health>k__BackingField: 0
+  deck:
+  - {fileID: 11400000, guid: e478edd3abf6513d3adc210028c369fa, type: 2}
+  - {fileID: 11400000, guid: e478edd3abf6513d3adc210028c369fa, type: 2}
+  - {fileID: 11400000, guid: 99d64174ab13b14ebb79e7ed0c0aac58, type: 2}
+  - {fileID: 11400000, guid: 99d64174ab13b14ebb79e7ed0c0aac58, type: 2}
+  - {fileID: 11400000, guid: 4b6dd48adf85a29019c512907057cfda, type: 2}
+  - {fileID: 11400000, guid: 4b6dd48adf85a29019c512907057cfda, type: 2}
+  - {fileID: 11400000, guid: 878b73b7205c94238b5ef2bb8e9e7d67, type: 2}
+  - {fileID: 11400000, guid: b6c3a53f81b936861b78b19b454f530d, type: 2}
+  - {fileID: 11400000, guid: b6c3a53f81b936861b78b19b454f530d, type: 2}
+  image: {fileID: 0}

@@ -15,7 +15,7 @@ MonoBehaviour:
   <title>k__BackingField: Coated Dagger
   <description>k__BackingField: A dagger coated in a weak poison for extra damage.
   <cost>k__BackingField: 1
-  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
+  <image>k__BackingField: {fileID: -1189428247240232539, guid: 9fa11ece91b5a7997b8cdad9842bfee6, type: 3}
   <manualTargetEffect>k__BackingField:
     rid: 603324146210046052
   <otherEffects>k__BackingField:

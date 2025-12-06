@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7425b7f53d88a4ee28c21928c0eae850, type: 3}
+  m_Name: Writhing Mass
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  <health>k__BackingField: 12
+  <initialShield>k__BackingField: 0
+  <attackPower>k__BackingField: 0
+  <image>k__BackingField: {fileID: 1998810656889988843, guid: b4371952d4d93bd11bc607831c17238e, type: 3}
+  <effects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324146210046258
+    <effect>k__BackingField:
+      rid: 603324146210046259
+  - <targetMode>k__BackingField:
+      rid: 603324146210046260
+    <effect>k__BackingField:
+      rid: 603324146210046261
+  - <targetMode>k__BackingField:
+      rid: 603324146210046262
+    <effect>k__BackingField:
+      rid: 603324146210046263
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046258
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046259
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 1
+        stackCount: 5
+    - rid: 603324146210046260
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046261
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 3
+    - rid: 603324146210046262
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046263
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 3

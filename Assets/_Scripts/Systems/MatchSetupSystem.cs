@@ -58,6 +58,7 @@ public class MatchSetupSystem : Singleton<MatchSetupSystem>
 
         // hero/enemy
         HeroSystem.instance.Setup(heroData);
+        HeroSystem.instance.heroView.ClearStatusEffects();
         EnemySystem.instance.Setup(enemyDatas);
 
         //cards

@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: A faintly glowing potion, its glass warm to the touch
     and invigorating.
   <cost>k__BackingField: 0
-  <image>k__BackingField: {fileID: 21300000, guid: 0b04cc727950af7d680ebcff395f9431, type: 3}
+  <image>k__BackingField: {fileID: -1231852952070679793, guid: 60cc7748f6d35eaa3aa16b7d8d353f5e, type: 3}
   <manualTargetEffect>k__BackingField:
     rid: -2
   <otherEffects>k__BackingField:

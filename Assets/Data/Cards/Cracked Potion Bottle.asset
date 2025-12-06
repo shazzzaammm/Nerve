@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: An old bottle containing some healing potion, barely
     filled halfway.
   <cost>k__BackingField: 1
-  <image>k__BackingField: {fileID: -393162805957087134, guid: 91710769b2290b3f58513ac4e281b772, type: 3}
+  <image>k__BackingField: {fileID: -3086988437078641168, guid: 3c914adf014f97dbd87ddd997d40e53d, type: 3}
   <manualTargetEffect>k__BackingField:
     rid: -2
   <otherEffects>k__BackingField:

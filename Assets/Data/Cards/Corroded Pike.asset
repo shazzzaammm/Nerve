@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: A large spear, its wood rotted and tip dulled. You
     dont know how long it will last.
   <cost>k__BackingField: 2
-  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
+  <image>k__BackingField: {fileID: 1906886972933382690, guid: 1e530400b0974a76187b9b982dbdf00b, type: 3}
   <manualTargetEffect>k__BackingField:
     rid: 603324146210046043
   <otherEffects>k__BackingField:

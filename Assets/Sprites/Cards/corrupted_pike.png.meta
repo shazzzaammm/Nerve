@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7e50f0b0980ab26149748647024cb089
+guid: 1e530400b0974a76187b9b982dbdf00b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2689072806232509438
-    second: green-poison-gas-toxic-icon-and-polluted-cloud-dangerous-dust-with-skull-and-thick-radiation-fog-death-vapor-and-death-smoke-illustration-concept-mist-dust-industrial-vector-3217785272_0
+      213: 1906886972933382690
+    second: corrupted_pike_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: green-poison-gas-toxic-icon-and-polluted-cloud-dangerous-dust-with-skull-and-thick-radiation-fog-death-vapor-and-death-smoke-illustration-concept-mist-dust-industrial-vector-3217785272_0
+      name: corrupted_pike_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 980
-        height: 980
+        y: 3
+        width: 387
+        height: 532
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: efbc6ae4871815520800000000000000
-      internalID: 2689072806232509438
+      spriteID: 222a388499f967a10800000000000000
+      internalID: 1906886972933382690
       vertices: []
       indices: 
       edges: []
@@ -125,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      green-poison-gas-toxic-icon-and-polluted-cloud-dangerous-dust-with-skull-and-thick-radiation-fog-death-vapor-and-death-smoke-illustration-concept-mist-dust-industrial-vector-3217785272_0: 2689072806232509438
+      corrupted_pike_0: 1906886972933382690
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

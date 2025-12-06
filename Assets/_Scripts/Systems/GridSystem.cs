@@ -66,7 +66,7 @@ public class GridSystem : Singleton<GridSystem>
                 TileType.WALL => blockedCell,
                 TileType.CHEST_SPAWN => chestCell,
                 TileType.EXIT => exitCell,
-                _ => blockedCell,
+                _ => walkableCell,
             };
             GridCellView cell = Instantiate(cellPrefab, gridParent.position + new Vector3(spacing.x * (pos.x - center.x), spacing.y * (pos.y - center.y)), Quaternion.identity, gridParent);
 

@@ -16,7 +16,7 @@ MonoBehaviour:
   <description>k__BackingField: A sword, the blade has been broken in half. Even
     then, it still looks reliable.
   <cost>k__BackingField: 1
-  <image>k__BackingField: {fileID: -5777657545968363414, guid: 810ed17eed8afab29a2f12f291cd99aa, type: 3}
+  <image>k__BackingField: {fileID: 3472014505362587296, guid: 92ca338aabd81d2ac8c78ce39ec6011b, type: 3}
   <manualTargetEffect>k__BackingField:
     rid: 603324146210046042
   <otherEffects>k__BackingField: []

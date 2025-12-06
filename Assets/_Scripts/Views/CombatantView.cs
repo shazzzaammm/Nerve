@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatantView : MonoBehaviour
 {
     [SerializeField] protected TMP_Text healthText;
     [SerializeField] protected StatusEffectsUI statusEffectsUI;
+    [SerializeField] protected Slider healthBar;
     private Dictionary<StatusEffectType, int> statusEffects = new();
     public int maxHealth { get; protected set; }
     public int currentHealth { get; protected set; }
@@ -19,6 +22,7 @@ public class CombatantView : MonoBehaviour
     protected void UpdateHealthText()
     {
         healthText.text = currentHealth + "/" + maxHealth;
+        healthBar.value = (float)currentHealth / maxHealth;
     }
 
     public void TakeDamage(int amount)
@@ -87,6 +91,15 @@ public class CombatantView : MonoBehaviour
         statusEffectsUI.UpdateStatusEffectsUI(type, GetStatusEffectStacks(type));
     }
 
+    public void ClearStatusEffects()
+    {
+        var keys = statusEffects.Keys;
+        foreach (StatusEffectType type in keys)
+        {
+            RemoveStatusEffect(type, GetStatusEffectStacks(type));
+            statusEffectsUI.UpdateStatusEffectsUI(type, GetStatusEffectStacks(type));
+        }
+    }
     public int GetStatusEffectStacks(StatusEffectType type)
     {
         if (statusEffects.ContainsKey(type)) return statusEffects[type];

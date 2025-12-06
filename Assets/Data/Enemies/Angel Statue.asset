@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7425b7f53d88a4ee28c21928c0eae850, type: 3}
+  m_Name: Angel Statue
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  <health>k__BackingField: 10
+  <initialShield>k__BackingField: 0
+  <attackPower>k__BackingField: 0
+  <image>k__BackingField: {fileID: 1695129703353074568, guid: 55b0df3e886f4e7a8b5833ec94618108, type: 3}
+  <effects>k__BackingField:
+  - <targetMode>k__BackingField:
+      rid: 603324146210046249
+    <effect>k__BackingField:
+      rid: 603324146210046251
+  - <targetMode>k__BackingField:
+      rid: 603324146210046256
+    <effect>k__BackingField:
+      rid: 603324146210046257
+  - <targetMode>k__BackingField:
+      rid: 603324146210046254
+    <effect>k__BackingField:
+      rid: 603324146210046255
+  - <targetMode>k__BackingField:
+      rid: 603324146210046252
+    <effect>k__BackingField:
+      rid: 603324146210046253
+  references:
+    version: 2
+    RefIds:
+    - rid: 603324146210046249
+      type: {class: CasterTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046251
+      type: {class: AddStatusEffectEffect, ns: , asm: Assembly-CSharp}
+      data:
+        statusEffectType: 0
+        stackCount: 5
+    - rid: 603324146210046252
+      type: {class: CasterTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046253
+      type: {class: HealEffect, ns: , asm: Assembly-CSharp}
+      data:
+        healAmount: 5
+    - rid: 603324146210046254
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046255
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 5
+    - rid: 603324146210046256
+      type: {class: HeroTM, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 603324146210046257
+      type: {class: DealDamageEffect, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 5

@@ -83,6 +83,7 @@ public abstract class GridCellView : MonoBehaviour
                     Destroy(enemyUnit.gameObject);
                 }
             }
+            /*
             foreach (GridCellView cell in GridSystem.instance.GetCellNeighbors(this))
             {
                 foreach (GridUnit neighbor in cell.occupiedUnits)
@@ -95,6 +96,7 @@ public abstract class GridCellView : MonoBehaviour
                 }
                 cell.occupiedUnits.Clear();
             }
+            */
             this.occupiedUnits.Clear();
             StartMatchGA startMatchGA = new(GridUnitSystem.instance.hero.data, enemyDatas);
             ActionSystem.instance.AddReaction(startMatchGA);
