@@ -3127,6 +3127,7 @@ Transform:
   - {fileID: 2010187456}
   - {fileID: 1634662011}
   - {fileID: 828669730}
+  - {fileID: 1137114060}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103249288
@@ -3249,6 +3250,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1121310960}
   m_CullTransparentMesh: 1
+--- !u!1 &1137114059
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137114060}
+  - component: {fileID: 1137114061}
+  m_Layer: 0
+  m_Name: ScreenShotSysterm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1137114060
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137114059}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1082932322}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1137114061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137114059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6c37cfdef29194e2a9bc657d09f7930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScreenshotManager
 --- !u!1 &1175975816
 GameObject:
   m_ObjectHideFlags: 0
@@ -4261,6 +4306,7 @@ MonoBehaviour:
   blockedCell: {fileID: 4991401669600201965, guid: fe2df5014cdc344caaa8391dffaec2ff, type: 3}
   chestCell: {fileID: 1905972613974416298, guid: 17d32e3f0b89b7158b8ba442288a7173, type: 3}
   exitCell: {fileID: 7646418658726370484, guid: 66a5be9cc1622825b8b704e3bc2afeff, type: 3}
+  bossCell: {fileID: -107747997857316453, guid: ca04cb9a0cc8528419937993372971fa, type: 3}
   size: {x: 10, y: 10}
   layouts:
   - {fileID: 2800000, guid: 6873fc84a8bfe4ce992c1a7309228b55, type: 3}
@@ -4273,6 +4319,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 477ce075c4ce1938582ec4af39865510, type: 3}
   - {fileID: 2800000, guid: aaa314022614ebc2ab2df71b67524cb1, type: 3}
   - {fileID: 2800000, guid: 6ac5af4681963fff5b9cf76c88fd7425, type: 3}
+  subBossLayout: {fileID: 2800000, guid: 37e1e0ab3f1229c239da3d7968d5c366, type: 3}
+  bossLayout: {fileID: 2800000, guid: fa3a8fd3926e711f09325a6c501e7100, type: 3}
 --- !u!1 &1450675496
 GameObject:
   m_ObjectHideFlags: 0
@@ -5666,6 +5714,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c4c4b21f850c8d85fb7d7d2bc8110de1, type: 2}
   - {fileID: 11400000, guid: c4c4b21f850c8d85fb7d7d2bc8110de1, type: 2}
   - {fileID: 11400000, guid: c4c4b21f850c8d85fb7d7d2bc8110de1, type: 2}
+  boss: {fileID: 11400000, guid: 3344386db52eea83fa98f5b203511d4d, type: 2}
   cards:
   - {fileID: 11400000, guid: 0f34405b5247e837c92fe2da80a42659, type: 2}
   - {fileID: 11400000, guid: 24329c0134beab18cafca9969dc16d12, type: 2}

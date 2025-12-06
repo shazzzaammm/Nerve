@@ -9,6 +9,7 @@ public class EnemyView : CombatantView
     [SerializeField] private TMP_Text intentionText;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private List<AutoTargetEffect> effects;
+    public EnemyData data {get; private set;}
     private int index = 0;
 
 
@@ -21,6 +22,7 @@ public class EnemyView : CombatantView
     public void Setup(EnemyData enemyData)
     {
         base.SetupBase(enemyData.health);
+        data = enemyData;
         spriteRenderer.sprite = enemyData.image;
         effects = enemyData.effects;
         index = 0;

@@ -9,7 +9,10 @@ public abstract class GridUnit : MonoBehaviour
     
     public void Move(Vector2 destination){
         positionOnGrid = destination;
-        transform.position = GridSystem.instance.GetCellAtPosition(positionOnGrid).transform.position;
+        GridCellView cell =GridSystem.instance.GetCellAtPosition(positionOnGrid);
+        if (cell != null)
+        transform.position = cell.transform.position;
+        else Destroy(this.gameObject);
     }
 
     

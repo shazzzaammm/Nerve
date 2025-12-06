@@ -8,7 +8,7 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
     public List<EnemyGridUnit> enemies { get; private set; } = new();
     public HeroGridUnit hero { get; private set; }
 
-    public void Setup(HeroData heroData, List<EnemyData> enemyDatas)
+    public void Setup(HeroData heroData, List<EnemyData> enemyDatas, bool boss)
     {
         foreach (EnemyData data in enemyDatas)
         {
@@ -16,6 +16,11 @@ public class GridUnitSystem : Singleton<GridUnitSystem>
             GridSystem.instance.SetRandomEnemyPosition(enemy);
             GridSystem.instance.SetEnemyPosition(enemy, enemies.Count);
             enemies.Add(enemy);
+        }
+        if (boss){
+            EnemyGridUnit bossUnit = GridUnitCreator.instance.CreateEnemyUnit(DataSystem.instance.boss);
+            GridSystem.instance.SetBossPosition(bossUnit);
+            enemies.Add(bossUnit);
         }
         hero = GridUnitCreator.instance.CreateHeroUnit(heroData);
         GridSystem.instance.SetRandomHeroPosition();

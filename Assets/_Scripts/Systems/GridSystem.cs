@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.TextCore;
 
@@ -9,14 +11,19 @@ public class GridSystem : Singleton<GridSystem>
     [SerializeField] private GridCellView walkableCell, blockedCell;
     [SerializeField] private ChestGridCell chestCell;
     [SerializeField] private ExitGridCell exitCell;
+    [SerializeField] private BossSpawnGridView bossCell;
 
     [SerializeField] private Vector2 size;
 
     [SerializeField] private Texture2D[] layouts;
+    [SerializeField] private Texture2D subBossLayout, bossLayout;
     private Vector2 spacing;
     Dictionary<Vector2, GridCellView> grid;
     List<Vector2> enemySpawnPositions;
     List<Vector2> heroSpawnPostions;
+    Vector2 bossSpawnPosition = Vector2.negativeInfinity;
+    private int levelsCleared = 0;
+
     void Start()
     {
         Setup();
@@ -38,13 +45,26 @@ public class GridSystem : Singleton<GridSystem>
     public void Setup()
     {
         DestroyLevel();
-        
+
         grid = new();
         heroSpawnPostions = new();
         enemySpawnPositions = new();
-        int randomLayout = Random.Range(0, layouts.Length);
-        Dictionary<Vector2Int, TileType> layout = LevelGenerationSystem.instance.Generate(layouts[randomLayout]);
-        spacing = new(size.x / layouts[randomLayout].width, size.y / layouts[randomLayout].height);
+        Texture2D chosenLayout;
+        if (levelsCleared == 10)
+        {
+            chosenLayout = bossLayout;
+        }
+        else if (levelsCleared == 5)
+        {
+            chosenLayout = subBossLayout;
+        }
+        else
+        {
+            int randomLayout = Random.Range(0, layouts.Length);
+            chosenLayout = layouts[randomLayout];
+        }
+        Dictionary<Vector2Int, TileType> layout = LevelGenerationSystem.instance.Generate(chosenLayout);
+        spacing = new(size.x / chosenLayout.width, size.y / chosenLayout.height);
 
         int sumX = 0;
         int sumY = 0;
@@ -66,6 +86,7 @@ public class GridSystem : Singleton<GridSystem>
                 TileType.WALL => blockedCell,
                 TileType.CHEST_SPAWN => chestCell,
                 TileType.EXIT => exitCell,
+                TileType.BOSS_SPAWN => bossCell,
                 _ => walkableCell,
             };
             GridCellView cell = Instantiate(cellPrefab, gridParent.position + new Vector3(spacing.x * (pos.x - center.x), spacing.y * (pos.y - center.y)), Quaternion.identity, gridParent);
@@ -77,6 +98,10 @@ public class GridSystem : Singleton<GridSystem>
             if (cellType == TileType.ENEMY_SPAWN)
             {
                 enemySpawnPositions.Add(new(pos.x, pos.y));
+            }
+            if (cellType == TileType.BOSS_SPAWN)
+            {
+                bossSpawnPosition = new(pos.x, pos.y);
             }
             cell.name = "Cell " + pos.x + " " + pos.y;
             cell.Setup(pos.x, pos.y);
@@ -90,7 +115,7 @@ public class GridSystem : Singleton<GridSystem>
             EnemyData chosenEnemy = possibleEnemyDatas.GetRandom();
             chosenEnemyDatas.Add(chosenEnemy);
         }
-        GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], chosenEnemyDatas);
+        GridUnitSystem.instance.Setup(DataSystem.instance.heroes[0], chosenEnemyDatas, bossSpawnPosition != Vector2.negativeInfinity);
     }
     public GridCellView GetCellAtPosition(Vector2 pos)
     {
@@ -148,6 +173,14 @@ public class GridSystem : Singleton<GridSystem>
         enemy.Move(cell);
     }
 
+    public void SetBossPosition(EnemyGridUnit boss)
+    {
+        if (bossSpawnPosition != Vector2.negativeInfinity){
+            boss.Move(bossSpawnPosition);
+        }
+        bossSpawnPosition = Vector2.negativeInfinity;
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (!gridParent) return;
@@ -158,24 +191,29 @@ public class GridSystem : Singleton<GridSystem>
     public void DisableVisuals()
     {
         Interactions.instance.playerCanMoveOnGrid = false;
-        foreach (var cell in grid.Values){
+        foreach (var cell in grid.Values)
+        {
             cell.gameObject.SetActive(false);
         }
     }
-    
-    private void EnableVisuals(){
+
+    private void EnableVisuals()
+    {
         Interactions.instance.playerCanMoveOnGrid = true;
-        if (grid.Count == 0){
+        if (grid.Count == 0)
+        {
             Setup();
             return;
         }
 
-        foreach (var cell in grid.Values){
+        foreach (var cell in grid.Values)
+        {
             cell.gameObject.SetActive(true);
         }
     }
-    
-    private void DestroyLevel(){
+
+    private void DestroyLevel()
+    {
         GridUnitSystem.instance.DestroyAllUnits();
         if (grid == null) return;
         foreach (var cell in grid.Values)
@@ -195,6 +233,7 @@ public class GridSystem : Singleton<GridSystem>
 
     private IEnumerator ExitLevelGAPerformer(ExitLevelGA exitLevelGA)
     {
+        levelsCleared = (levelsCleared + 1 ) % 11;
         Setup();
         yield return null;
     }

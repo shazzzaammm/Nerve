@@ -93,8 +93,12 @@ public class CombatantView : MonoBehaviour
 
     public void ClearStatusEffects()
     {
-        var keys = statusEffects.Keys;
-        foreach (StatusEffectType type in keys)
+        List<StatusEffectType> types = new();
+        foreach (StatusEffectType type in statusEffects.Keys)
+        {
+            types.Add(type);
+        }
+        foreach (StatusEffectType type in types)
         {
             RemoveStatusEffect(type, GetStatusEffectStacks(type));
             statusEffectsUI.UpdateStatusEffectsUI(type, GetStatusEffectStacks(type));

@@ -37,7 +37,7 @@ public class LevelGenerationSystem : Singleton<LevelGenerationSystem>
                     "22B14C" => TileType.PLAYER_SPAWN,
                     "FF7E00" => TileType.ENEMY_SPAWN,
                     "FFF200" => TileType.CHEST_SPAWN,
-                    "0000FF" => TileType.BOSS_SPAWN,
+                    "4D6DF3" => TileType.BOSS_SPAWN,
                     _ => TileType.NONE,
                 };
                 if (tileType == TileType.NONE)
